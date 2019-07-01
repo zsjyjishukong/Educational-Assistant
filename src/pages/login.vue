@@ -18,8 +18,8 @@
           <yd-input slot="right" type="password" v-model="password" placeholder="请输入教务系统密码"></yd-input>
         </yd-cell-item>
         <yd-cell-item>
-          <span slot="left">密码：</span>
-          <yd-input slot="right" v-model="password" regex="^\d{5,12}$" placeholder="请输入您的QQ号码"></yd-input>
+          <span slot="left">手机号码：</span>
+          <span slot="left" class="phone">{{phone === '' ? '微信授权手机号码' : phone}}</span>
         </yd-cell-item>
         <yd-cell-item>
           <span slot="left"><yd-switch v-model="isAgree" disabled></yd-switch></span>
@@ -99,7 +99,8 @@ export default {
       password: '',
       isAgree: false,
       agreeShow: false,
-      studentIDVerify: ''
+      studentIDVerify: '',
+      phone: ''
     }
   },
   methods: {
@@ -182,5 +183,8 @@ export default {
   }
   #agree-pop{
     padding: 10px 10px;
+  }
+  .phone{
+    color: #4395FF;
   }
 </style>
