@@ -18,10 +18,6 @@
           <yd-input slot="right" type="password" v-model="password" placeholder="请输入教务系统密码"></yd-input>
         </yd-cell-item>
         <yd-cell-item>
-          <span slot="left">手机号码：</span>
-          <span slot="left" class="phone">{{phone === '' ? '微信授权手机号码' : phone}}</span>
-        </yd-cell-item>
-        <yd-cell-item>
           <span slot="left"><yd-switch v-model="isAgree" disabled></yd-switch></span>
           <span slot="left" class="agree-father">同意<span @click="showAgree" class="agree">服务协议</span></span>
         </yd-cell-item>
@@ -31,7 +27,7 @@
         <div style="background-color:#fff; height: 5rem">
           <div style="background: #fff; padding: 20px;">
           一、特别提示
-          萌小助所提供的各项服务的所有权和运作权，均归北京口皿口科技有限公司（以下简称“口皿口”）所有。口皿口在此特别提醒您（以下简称“用户”或“您”）在使用口皿口功能之前，请认真阅读本《用户使用协议》（以下简称“协议”），确保您充分理解本协议中各条款。除非您接受本协议所有条款，否则您无权使用本协议所涉服务及功能。您的绑定、登录、使用等行为将视为对本协议的接受，并同意接受本协议各项条款的约束。如果您对本协议的条款有疑问，请通过口皿口客服渠道进行咨询，口皿口客服将向您解释条款内容。
+          JY教务助手所提供的各项服务的所有权和运作权，均归JY教务助手开发组（）所有。口皿口在此特别提醒您（以下简称“用户”或“您”）在使用口皿口功能之前，请认真阅读本《用户使用协议》（以下简称“协议”），确保您充分理解本协议中各条款。除非您接受本协议所有条款，否则您无权使用本协议所涉服务及功能。您的绑定、登录、使用等行为将视为对本协议的接受，并同意接受本协议各项条款的约束。如果您对本协议的条款有疑问，请通过口皿口客服渠道进行咨询，口皿口客服将向您解释条款内容。
           二、服务内容
           口皿口仅为用户提供信息分享、传送及获取的平台，用户理解并同意遵守口皿口使用协议，需确保提供的账号或资料的真实性。如果用户提供的资料不合法、不真实、未经授权使用他人账户的行为，用户需承担因此引起的相应责任及后果。如用户发现任何人违反本协议约定或以其他不当的方式使用本服务，请立即向口皿口举报或投诉，口皿口将依本协议约定进行处理。遵循以上准则并在此授权口皿口，将您的信息与所属学校进行绑定，口皿口将会为您提供课程信息、成绩信息、图书馆信息等网络服务功能。
           如您开通账户绑定功能后，不愿继续使用的，可随时通过相关途径关闭此功能，口皿口将不再将您的信息做任何展示。您理解并确认，因口皿口业务发展或与单位的合作关系中止或终止等原因，可能导致口皿口无法继续向您提供账户绑定服务，对此口皿口不承担违约责任。
@@ -99,8 +95,7 @@ export default {
       password: '',
       isAgree: false,
       agreeShow: false,
-      studentIDVerify: '',
-      phone: ''
+      studentIDVerify: ''
     }
   },
   methods: {
@@ -120,6 +115,7 @@ export default {
       }
     },
     bind: function () {
+      this.$router.push('/index')
       if (this.isAgree === true) {
         if (this.$refs.studentID.valid) {
           this.$dialog.toast({

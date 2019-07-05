@@ -28,6 +28,7 @@
 import scoreBody from '../components/index/score/scoreBody'
 import scheduleBody from '../components/index/schedule/shcedule-body'
 import mine from '../components/index/mine/mine'
+
 export default {
   name: 'index',
   components: {
@@ -58,8 +59,28 @@ export default {
   },
   watch: {
   },
+  beforeRouteEnter: (to, from, next) => {
+    if (sessionStorage.getItem('token') && sessionStorage.getItem('token').length === 30) {
+      next()
+    } else {
+      next('/')
+    }
+  },
   mounted: function () {
-    this.changeNavAndTab(0)
+    switch (this.$route.hash) {
+      case '#mine':
+        this.changeNavAndTab(2)
+        break
+      case '#schedule':
+        this.changeNavAndTab(1)
+        break
+      case '':
+        this.changeNavAndTab(0)
+        break
+      case '#score':
+        this.changeNavAndTab(0)
+        break
+    }
   }
 }
 </script>
