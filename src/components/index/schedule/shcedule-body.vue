@@ -161,9 +161,11 @@ export default {
 }
 .yd-flexbox-item{
   text-align: center;
+  user-select: none;
 }
 .schedule{
   color: #eee;
+  height: 100%;
 }
 .title{
   background: #777;
@@ -174,9 +176,9 @@ export default {
 }
 .body .yd-flexbox-item:nth-child(1){
   background: #ccc;
-  height: 2.615rem;
+  height: 2.61rem;
   vertical-align: center;
-  line-height: 2.6rem;
+  line-height: 2.61rem;
 }
 .body .yd-flexbox-item:nth-of-type(2),
 .body .yd-flexbox-item:nth-of-type(3),
@@ -188,7 +190,7 @@ export default {
 {
   background: rgba(0,0,0,.5);
   border-radius: 0.1rem;
-  height: 2.4rem;
+  height: 2.5rem;
   line-height: 2.6rem;
   width: 80%;
   margin-left: 0.05rem;

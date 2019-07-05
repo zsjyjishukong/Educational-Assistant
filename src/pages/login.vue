@@ -115,6 +115,7 @@ export default {
       }
     },
     bind: function () {
+      sessionStorage.setItem('token', '1')
       this.$router.push('/index')
       if (this.isAgree === true) {
         if (this.$refs.studentID.valid) {

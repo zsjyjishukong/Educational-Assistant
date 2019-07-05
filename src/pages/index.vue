@@ -59,11 +59,19 @@ export default {
   },
   watch: {
   },
-  beforeRouteEnter: (to, from, next) => {
-    if (sessionStorage.getItem('token') && sessionStorage.getItem('token').length === 30) {
+  beforeRouteEnter: function (to, from, next) {
+    if (sessionStorage.getItem('token') && sessionStorage.getItem('token').length === 1) {
+      console.log('通过')
       next()
     } else {
-      next('/')
+      console.log('未通过')
+      next(vm => {
+        vm.$dialog.toast({
+          mes: '参数错误，请重新登陆',
+          timeout: 5000,
+          icon: 'error'
+        })
+      })
     }
   },
   mounted: function () {
