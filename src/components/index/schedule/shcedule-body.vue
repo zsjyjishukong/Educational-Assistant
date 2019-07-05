@@ -4,8 +4,8 @@
       <div class="schedule">
         <yd-flexbox class="title">
           <yd-flexbox-item>
-            12月<br>
-            12周
+            12周<br>
+            12月
           </yd-flexbox-item>
           <yd-flexbox-item>
             周一<br>
@@ -41,7 +41,8 @@
             1-2
           </yd-flexbox-item>
           <yd-flexbox-item>
-            1
+            {{classes[0][0].name}}
+            {{classes[0][0].teacher}}
           </yd-flexbox-item>
           <yd-flexbox-item>
             2
@@ -147,7 +148,55 @@
 
 <script>
 export default {
-  name: 'schedule-body'
+  name: 'schedule-body',
+  data () {
+    return {
+      classes: [
+        [
+          {name: 'shujuku', teacher: '李艳艳', weeks: '1-6'},
+          {name: 'shujuku', teacher: '啦啦啦', weeks: '1-6'},
+          {name: 'shujuku', teacher: '顶顶顶', weeks: '1-6'},
+          {name: 'shujuku', teacher: '啊啊啊', weeks: '1-6'}
+        ],
+        [
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'}
+        ],
+        [
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'}
+        ],
+        [
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'}
+        ],
+        [
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'}
+        ],
+        [
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'}
+        ],
+        [
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'},
+          {name: 'shujuku', teacher: '', weeks: '1-6'}
+        ]
+      ]
+    }
+  }
 }
 </script>
 
@@ -171,12 +220,9 @@ export default {
   background: #777;
   padding: 0.1rem 0;
 }
-.body{
-
-}
 .body .yd-flexbox-item:nth-child(1){
   background: #ccc;
-  height: 2.61rem;
+  height: 2.66rem;
   vertical-align: center;
   line-height: 2.61rem;
 }
@@ -191,8 +237,12 @@ export default {
   background: rgba(0,0,0,.5);
   border-radius: 0.1rem;
   height: 2.5rem;
-  line-height: 2.6rem;
+  line-height: 2.7rem;
   width: 80%;
   margin-left: 0.05rem;
 }
+  .yd-flexbox-item{
+    font-size: 12px;
+    line-height: 15px;
+  }
 </style>
