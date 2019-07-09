@@ -385,7 +385,7 @@ export default {
 <style scoped>
 #schedule-body{
   height: 100%;
-  background-image: url("/static/images/scorebg.jpg");
+  background-image: url("scorebg.jpg");
 }
 .blur {
   background: rgba(0, 0, 0, .3);
@@ -422,7 +422,6 @@ export default {
   display: flex;
   justify-content:center;
   align-items:Center;
-  /*line-height: 2.7rem;*/
   width: 80%;
   margin-left: 0.05rem;
 }
