@@ -40,105 +40,280 @@
           <yd-flexbox-item>
             1-2
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            {{classes[0][0].name}}
-            {{classes[0][0].teacher}}
+          <yd-flexbox-item :style="{background: classes[0][0].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[0][0].name}}
+              </div>
+              <div class="class-teacher">
+                {{classes[0][0].teacher}}
+              </div>
+              <div class="class-weeks">
+                {{classes[0][0].weeks}}
+              </div>
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            2
+          <yd-flexbox-item :style="{background: classes[1][0].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[1][0].name}}
+              </div>
+              <div class="class-teacher">
+                {{classes[1][0].teacher}}
+              </div>
+              <div class="class-weeks">
+                {{classes[1][0].weeks}}
+              </div>
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            3
+          <yd-flexbox-item :style="{background: classes[2][0].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[2][0].name}}
+              </div>
+              {{classes[2][0].teacher}}<br>
+              {{classes[2][0].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            4
+          <yd-flexbox-item :style="{background: classes[3][0].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[3][0].name}}
+              </div>
+              {{classes[3][0].teacher}}<br>
+              {{classes[3][0].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            5
+          <yd-flexbox-item :style="{background: classes[4][0].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[4][0].name}}
+              </div>
+              {{classes[4][0].teacher}}<br>
+              {{classes[4][0].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            6
+          <yd-flexbox-item :style="{background: classes[5][0].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[5][0].name}}
+              </div>
+              {{classes[5][0].teacher}}<br>
+              {{classes[5][0].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            7
+          <yd-flexbox-item :style="{background: classes[6][0].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[6][0].name}}
+              </div>
+              {{classes[6][0].teacher}}<br>
+              {{classes[6][0].weeks}}
+            </div>
           </yd-flexbox-item>
         </yd-flexbox>
         <yd-flexbox class="body">
           <yd-flexbox-item>
             3-4
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            1
+          <yd-flexbox-item :style="{background: classes[0][1].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[0][1].name}}
+              </div>
+              {{classes[0][1].teacher}}<br>
+              {{classes[0][1].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            2
+          <yd-flexbox-item :style="{background: classes[1][1].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[1][1].name}}
+              </div>
+              {{classes[1][1].teacher}}<br>
+              {{classes[1][1].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            3
+          <yd-flexbox-item :style="{background: classes[2][1].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[2][1].name}}
+              </div>
+              {{classes[2][1].teacher}}<br>
+              {{classes[2][1].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            4
+          <yd-flexbox-item :style="{background: classes[3][1].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[3][1].name}}
+              </div>
+              {{classes[3][1].teacher}}<br>
+              {{classes[3][1].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            5
+          <yd-flexbox-item :style="{background: classes[4][1].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[4][1].name}}
+              </div>
+              {{classes[4][1].teacher}}<br>
+              {{classes[4][1].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            6
+          <yd-flexbox-item :style="{background: classes[5][1].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[5][1].name}}
+              </div>
+              {{classes[5][1].teacher}}<br>
+              {{classes[5][1].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            7
+          <yd-flexbox-item :style="{background: classes[6][1].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[6][1].name}}
+              </div>
+              {{classes[6][1].teacher}}<br>
+              {{classes[6][1].weeks}}
+            </div>
           </yd-flexbox-item>
         </yd-flexbox>
         <yd-flexbox class="body">
           <yd-flexbox-item>
             5-6
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            1
+          <yd-flexbox-item :style="{background: classes[0][2].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[0][2].name}}
+              </div>
+              {{classes[0][2].teacher}}<br>
+              {{classes[0][2].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            2
+          <yd-flexbox-item :style="{background: classes[1][2].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[1][2].name}}
+              </div>
+              {{classes[1][2].teacher}}<br>
+              {{classes[1][2].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            3
+          <yd-flexbox-item :style="{background: classes[2][2].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[2][2].name}}
+              </div>
+              {{classes[2][2].teacher}}<br>
+              {{classes[2][2].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            4
+          <yd-flexbox-item :style="{background: classes[3][2].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[3][2].name}}
+              </div>
+              {{classes[3][2].teacher}}<br>
+              {{classes[3][2].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            5
+          <yd-flexbox-item :style="{background: classes[4][2].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[4][2].name}}
+              </div>
+              {{classes[4][2].teacher}}<br>
+              {{classes[4][2].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            6
+          <yd-flexbox-item :style="{background: classes[5][2].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[5][2].name}}
+              </div>
+              {{classes[5][2].teacher}}<br>
+              {{classes[5][2].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            7
+          <yd-flexbox-item :style="{background: classes[6][2].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[6][2].name}}
+              </div>
+              {{classes[6][2].teacher}}<br>
+              {{classes[6][2].weeks}}
+            </div>
           </yd-flexbox-item>
         </yd-flexbox>
         <yd-flexbox class="body">
           <yd-flexbox-item>
             7-8
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            1
+          <yd-flexbox-item :style="{background: classes[0][3].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[0][3].name}}
+              </div>
+              {{classes[0][3].teacher}}<br>
+              {{classes[0][3].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            2
+          <yd-flexbox-item :style="{background: classes[1][3].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[1][3].name}}
+              </div>
+              {{classes[1][3].teacher}}<br>
+              {{classes[1][3].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            3
+          <yd-flexbox-item :style="{background: classes[2][3].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[2][3].name}}
+              </div>
+              {{classes[2][3].teacher}}<br>
+              {{classes[2][3].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            4
+          <yd-flexbox-item :style="{background: classes[3][3].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[3][3].name}}
+              </div>
+              {{classes[3][3].teacher}}<br>
+              {{classes[3][3].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            5
+          <yd-flexbox-item :style="{background: classes[4][3].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[4][3].name}}
+              </div>
+              {{classes[4][3].teacher}}<br>
+              {{classes[4][3].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            6
+          <yd-flexbox-item :style="{background: classes[5][3].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[5][3].name}}
+              </div>
+              {{classes[5][3].teacher}}<br>
+              {{classes[5][3].weeks}}
+            </div>
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            7
+          <yd-flexbox-item :style="{background: classes[6][3].bgcolor}">
+            <div class="class-detail">
+              <div class="class-name">
+                {{classes[6][3].name}}
+              </div>
+              {{classes[6][3].teacher}}<br>
+              {{classes[6][3].weeks}}
+            </div>
           </yd-flexbox-item>
         </yd-flexbox>
       </div>
@@ -152,47 +327,54 @@ export default {
   data () {
     return {
       classes: [
+        // 周一 1-4 节
         [
-          {name: 'shujuku', teacher: '李艳艳', weeks: '1-6'},
-          {name: 'shujuku', teacher: '啦啦啦', weeks: '1-6'},
-          {name: 'shujuku', teacher: '顶顶顶', weeks: '1-6'},
-          {name: 'shujuku', teacher: '啊啊啊', weeks: '1-6'}
+          {name: '数据库原理与应用', teacher: '李艳艳', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啦啦啦', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '顶顶顶', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啊啊啊', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'}
         ],
+        // 周二 1-4 节
         [
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'}
+          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,255,255,0)'},
+          {name: 'shujuku', teacher: '啦啦啦', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '顶顶顶', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啊啊啊', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'}
         ],
+        // 周三 1-4 节
         [
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'}
+          {name: 'shujuku', teacher: '李艳艳', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啦啦啦', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '顶顶顶', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啊啊啊', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'}
         ],
+        // 周四 1-4 节
         [
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'}
+          {name: 'shujuku', teacher: '李艳艳', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啦啦啦', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '顶顶顶', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啊啊啊', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'}
         ],
+        // 周五 1-4 节
         [
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'}
+          {name: 'shujuku', teacher: '李艳艳', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啦啦啦', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '顶顶顶', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啊啊啊', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'}
         ],
+        // 周六 1-4 节
         [
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'}
+          {name: 'shujuku', teacher: '李艳艳', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啦啦啦', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '顶顶顶', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啊啊啊', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'}
         ],
+        // 周日 1-4 节
         [
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'},
-          {name: 'shujuku', teacher: '', weeks: '1-6'}
+          {name: 'shujuku', teacher: '李艳艳', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啦啦啦', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '顶顶顶', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'},
+          {name: 'shujuku', teacher: '啊啊啊', weeks: '1-6', bgcolor: 'rgba(255,0,0,0.5)'}
         ]
       ]
     }
@@ -237,12 +419,18 @@ export default {
   background: rgba(0,0,0,.5);
   border-radius: 0.1rem;
   height: 2.5rem;
-  line-height: 2.7rem;
+  display: flex;
+  justify-content:center;
+  align-items:Center;
+  /*line-height: 2.7rem;*/
   width: 80%;
   margin-left: 0.05rem;
 }
-  .yd-flexbox-item{
-    font-size: 12px;
+  .class-detail{
+    font-size: 11px;
+    line-height: 0.6rem;
+  }
+  .class-name{
     line-height: 15px;
   }
 </style>

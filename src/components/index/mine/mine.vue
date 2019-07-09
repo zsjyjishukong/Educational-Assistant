@@ -3,7 +3,7 @@
     <div id="user-detail">
       <div class="user-detail-content">
         <div class="header-pic-father">
-          <img class="header-pic" src="/static/images/head.jpg">
+          <img class="header-pic" src="./static/head.jpg">
         </div>
         <div class="user-info">
           <div>姓名：齐昊宇</div>
@@ -23,17 +23,17 @@
     <yd-slider autoplay="3000">
       <yd-slider-item>
         <a href="http://www.ydcss.com">
-          <img src="/static/images/slider1.jpg">
+          <img src="./static/slider1.jpg">
         </a>
       </yd-slider-item>
       <yd-slider-item>
         <a @click="uploadNotify">
-          <img src="/static/images/slider2.jpg">
+          <img src="./static/slider2.jpg">
         </a>
       </yd-slider-item>
       <yd-slider-item>
-        <a href="http://www.ydcss.com">
-          <img src="/static/images/slider3.jpg">
+        <a href="http://pz.wendu.com/">
+          <img src="./static/slider3.jpg">
         </a>
       </yd-slider-item>
     </yd-slider>
@@ -83,7 +83,7 @@ export default {
   .user-detail-content .header-pic {
     border: 1px solid #07B3F9;
     border-radius: 30px;
-    width: 80%;
+    width: 60px;
     float: left;
     display: inline;
   }
@@ -117,7 +117,7 @@ export default {
     float: right;
     height: 0.45rem;
     width: 0.45rem;
-    background-image: url("/static/images/right-arrow.png");
+    background-image: url("./static/right-arrow.png");
     background-size: 100% 100%;
     background-repeat: no-repeat;
   }
