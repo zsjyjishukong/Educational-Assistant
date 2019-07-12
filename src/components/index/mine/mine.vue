@@ -22,7 +22,7 @@
     </div>
     <yd-slider autoplay="3000">
       <yd-slider-item>
-        <a href="http://www.ydcss.com">
+        <a @click="openPage('http://www.ydcss.com')"  >
           <img src="./static/slider1.jpg">
         </a>
       </yd-slider-item>
@@ -32,7 +32,7 @@
         </a>
       </yd-slider-item>
       <yd-slider-item>
-        <a href="http://pz.wendu.com/">
+        <a @click="openPage('http://pz.wendu.com/')">
           <img src="./static/slider3.jpg">
         </a>
       </yd-slider-item>
@@ -58,6 +58,9 @@ export default {
     },
     uploadNotify: function () {
       this.popout('v0.0.1更新公告', '<p>【新增】成绩查询、课表查询</p><p>【解决】密码含有特殊字符无法登陆的bug</p>')
+    },
+    openPage: function (url) {
+      window.open(url, '_blank')
     }
   }
 }
