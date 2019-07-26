@@ -11,22 +11,36 @@
         separator=","
         prefix="总绩点："
       ></yd-countup>
-      <yd-icon name="warn-outline" style="font-size: small" @click.native="showTip()"></yd-icon>
       <span class="name">
         学院：信息管理系
       </span>
     </div>
     <yd-accordion>
       <yd-accordion-item title="2018-2019学年">
-        <div style="padding: .24rem;">
-          <p>花间一壶酒，独酌无相亲。</p>
-          <p>举杯邀明月，对影成三人。</p>
-          <p>月既不解饮，影徒随我身。</p>
-          <p>暂伴月将影，行乐须及春。</p>
-          <p>我歌月徘徊，我舞影零乱。</p>
-          <p>醒时同交欢，醉后各分散。</p>
-          <p>永结无情游，相期邈云汉。</p>
-        </div>
+        <div style="text-align: center;">第一学期</div>
+        <table class="score-table" cellspacing="0">
+          <tr class="first-tr">
+            <td>课程</td>
+            <td>学分</td>
+            <td>平时成绩</td>
+            <td>期末成绩</td>
+            <td>总成绩</td>
+          </tr>
+          <tr>
+            <td>大学体育D</td>
+            <td>2.0</td>
+            <td>100</td>
+            <td>100</td>
+            <td>100</td>
+          </tr>
+          <tr>
+            <td>思想道德修养与法律基础</td>
+            <td>2.0</td>
+            <td>100</td>
+            <td>100</td>
+            <td>100</td>
+          </tr>
+        </table>
       </yd-accordion-item>
       <yd-accordion-item title="2017-2018学年">
         <div style="padding: .24rem;">
@@ -54,23 +68,33 @@
 export default {
   name: 'scoreBody',
   methods: {
-    showTip: function () {
-      this.$dialog.alert({mes: '绩点是由公式：绩点=∑（学分*绩点）/∑学分<br>计算而得，不含公共任意选修课，仅供参考！'})
-    }
   }
 }
 </script>
 
 <style scoped>
-#score-body{
-  padding-top: 0.3rem;
-}
-.jd{
-  text-align: center;
-  margin-bottom: 0.3rem;
-  color: #04be02;
-}
-.name{
-  margin: .2rem;
-}
+  #score-body{
+    padding-top: 0.3rem;
+  }
+  .jd{
+    text-align: center;
+    margin-bottom: 0.3rem;
+    color: #04be02;
+  }
+  .name{
+    margin: .2rem;
+  }
+  .score-table{
+    margin: auto;
+    width: 100%;
+    border-top: 1px solid #0bb20c;
+    border-bottom: 1px solid #0bb20c;
+  }
+  .score-table th, .score-table td{
+    text-align: center;
+  }
+  .first-tr td{
+    border-bottom: 1px solid #0bb20c;
+    mso-cellspacing: 0;
+  }
 </style>
