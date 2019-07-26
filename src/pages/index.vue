@@ -98,8 +98,6 @@ export default {
       }
     },
     showSelectYear: function () {
-      console.log('aaa')
-      console.log(this.selectYearShow)
       this.selectYearShow = true
     }
   },
