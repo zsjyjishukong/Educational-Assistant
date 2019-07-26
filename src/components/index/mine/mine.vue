@@ -13,9 +13,40 @@
       </div>
     </div>
     <div class="user-selects">
-      <div class="user-select">隐私设置 <span class="right-arrow"></span></div>
-      <div class="user-select">打赏我们 <span class="right-arrow"></span></div>
-      <div class="user-select">关于我们 <span class="right-arrow"></span></div>
+      <div class="user-select" @click="privatyShow = true">隐私设置 <span class="right-arrow"></span></div>
+      <div class="user-select" @click="rewardShow = true">打赏我们 <span class="right-arrow"></span></div>
+      <div class="user-select" @click="aboutShow = true">关于我们 <span class="right-arrow"></span></div>
+      <yd-popup v-model="privatyShow" position="center" width="90%">
+        <div style="background-color:#fff; padding: 2% 5%;">
+          <p>
+            隐私设置
+            <yd-button @click.native="privatyShow = false">Close Center Popup</yd-button>
+          </p>
+        </div>
+      </yd-popup>
+      <yd-popup v-model="rewardShow" position="center" width="50%">
+        <div style="background-color:#fff; padding: 2% 5%; text-align: center;" class="reward">
+          <p>
+            微信扫描下方二维码，支持我们
+          </p>
+          <p>
+            <img src="./static/shoukuanma.png" alt="" height="200">
+          </p>
+          <p>
+            <yd-button @click.native="rewardShow = false">Close Center Popup</yd-button>
+          </p>
+        </div>
+      </yd-popup>
+      <yd-popup v-model="aboutShow" position="center" width="50%">
+        <div style="background-color:#fff; padding: 2% 5%;">
+          <p>
+            我们是来自于河北建筑工程学院的在校同学和校友，为各位在校同学服务。我们的资金来源于广告收入以及用户捐款，您的支持是我们向前的动力。
+          </p>
+          <p>
+            <yd-button @click.native="privatyShow = false">Close Center Popup</yd-button>
+          </p>
+        </div>
+      </yd-popup>
     </div>
     <div class="unbind">
       <yd-button size="large" type="danger">解除绑定</yd-button>
@@ -43,6 +74,13 @@
 <script>
 export default {
   name: 'mine',
+  data () {
+    return {
+      privatyShow: false,
+      rewardShow: false,
+      aboutShow: false
+    }
+  },
   methods: {
     popout: function (title, msg) {
       this.$dialog.confirm({
@@ -128,5 +166,8 @@ export default {
     margin: 0 auto 0.5rem auto;
     width: 70%;
 
+  }
+  .reward>p{
+    margin-bottom: 10px;
   }
 </style>
