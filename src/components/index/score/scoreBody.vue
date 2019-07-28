@@ -74,11 +74,12 @@ export default {
 
 <style scoped>
   #score-body{
-    padding-top: 0.3rem;
+    height: 100%;
   }
   .jd{
     text-align: center;
-    margin-bottom: 0.3rem;
+    padding-top: 0.3rem;
+    padding-bottom:  0.3rem;
     color: #04be02;
   }
   .name{

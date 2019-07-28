@@ -13,12 +13,9 @@ export default {
 </script>
 
 <style>
-#app {
-  width: 100%;
-}
-.yd-scrollview:after{
-  height: 0;
-}
+  #app {
+    width: 100%;
+  }
   .fade-enter{
     opacity: 0;
   }
