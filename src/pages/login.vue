@@ -18,7 +18,7 @@
           <yd-input slot="right" type="password" v-model="password" placeholder="请输入教务系统密码"></yd-input>
         </yd-cell-item>
         <yd-cell-item>
-          <span slot="left"><yd-switch v-model="isAgree" disabled></yd-switch></span>
+          <span slot="left"><yd-switch v-model="isAgree"></yd-switch></span>
           <span slot="left" class="agree-father">阅读并同意<span @click="showAgree" class="agree">服务协议（点击并仔细阅读）</span></span>
         </yd-cell-item>
       </yd-cell-group>
@@ -113,10 +113,10 @@ export default {
     switchClick: function () {
       console.log('swith click')
       this.isAgree = false
-      // this.$dialog.toast({
-      //   mes: '请点击右侧“服务协议”并仔细阅读至底部',
-      //   timeout: 2000
-      // })
+      this.$dialog.toast({
+        mes: '请点击右侧“服务协议”并仔细阅读至底部',
+        timeout: 2000
+      })
     },
     agreeOrNot: function (choose) {
       this.agreeShow = false
@@ -151,6 +151,8 @@ export default {
         })
       }
     }
+  },
+  mounted () {
   }
 }
 </script>

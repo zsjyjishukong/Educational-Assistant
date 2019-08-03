@@ -16,58 +16,67 @@
       </span>
     </div>
     <yd-accordion>
-      <yd-accordion-item title="2018-2019学年">
-        <div style="text-align: center;">第一学期</div>
-        <table class="score-table" cellspacing="0">
-          <tr class="first-tr">
-            <td>课程</td>
-            <td>学分</td>
-            <td>平时成绩</td>
-            <td>期末成绩</td>
-            <td>总成绩</td>
-          </tr>
-          <tr>
-            <td>大学体育D</td>
-            <td>2.0</td>
-            <td>100</td>
-            <td>100</td>
-            <td>100</td>
-          </tr>
-          <tr>
-            <td>思想道德修养与法律基础</td>
-            <td>2.0</td>
-            <td>100</td>
-            <td>100</td>
-            <td>100</td>
-          </tr>
-        </table>
-      </yd-accordion-item>
-      <yd-accordion-item title="2017-2018学年">
-        <div style="padding: .24rem;">
-          <p>岱宗夫如何，齐鲁青未了。</p>
-          <p>造化钟神秀，阴阳割昏晓。</p>
-          <p>荡胸生层云，决眦入归鸟。</p>
-          <p>会当凌绝顶，一览众山小。</p>
-        </div>
-      </yd-accordion-item>
-      <yd-accordion-item title="2016-2017学年">
-        <div style="padding: .24rem;">
-          <p>言入黄花川，每逐青溪水。</p>
-          <p>随山将万转，趣途无百里。</p>
-          <p>声喧乱石中，色静深松里。</p>
-          <p>漾漾泛菱荇，澄澄映葭苇。</p>
-          <p>我心素已闲，清川澹如此。</p>
-          <p>请留盘石上，垂钓将已矣。</p>
-        </div>
-      </yd-accordion-item>
+      <div v-for="(valYear, keyYear) in schedule" :key="keyYear">
+        <yd-accordion-item v-for="(valTerm, keyTerm) in valYear" :title="keyYear + '学年 第' + keyTerm + '学期'" :key="keyTerm">
+          <table class="score-table" cellspacing="0">
+            <tr class="first-tr">
+              <td>课程</td>
+              <td>学分</td>
+              <td>平时成绩</td>
+              <td>期末成绩</td>
+              <td>总成绩</td>
+            </tr>
+            <tr v-for="(data, keyData) in valTerm" :key="keyData" @click="scoreTip()">
+              <td v-text="limitTextLength(data.lesson_name, 12)"></td>
+              <td>{{data.point}}</td>
+              <td>{{data.peace_score}}</td>
+              <td>{{data.term_end_score}}</td>
+              <td>{{data.all_score}}</td>
+            </tr>
+            <tr>
+              <td>思想道德修养与法律基础</td>
+              <td>2.0</td>
+              <td>100</td>
+              <td>100</td>
+              <td>100</td>
+            </tr>
+          </table>
+        </yd-accordion-item>
+      </div>
     </yd-accordion>
   </div>
 </template>
 
 <script>
+import {getScore} from '../../../api/index'
 export default {
   name: 'scoreBody',
   methods: {
+    async queryScore () {
+      let userid = '20153320140'
+      let pass = '130682qhy'
+      let res = await getScore(userid, pass)
+      this.schedule = res
+    },
+    limitTextLength: function (text, num) {
+      if (text.length > num) {
+        return text.substring(0, num - 3) + '…'
+      }
+      return text
+    }
+  },
+  data () {
+    return {
+      schedule: null
+    }
+  },
+  mounted () {
+    this.queryScore()
+  },
+  watch: {
+    schedule: {
+      deep: true
+    }
   }
 }
 </script>
