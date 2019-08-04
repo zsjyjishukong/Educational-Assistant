@@ -6,7 +6,7 @@
       </span>
       <yd-countup
         endnum="3.4556"
-        duration="3"
+        duration="2"
         decimals="2"
         separator=","
         prefix="总绩点："
@@ -16,7 +16,7 @@
       </span>
     </div>
     <yd-accordion>
-      <div v-for="(valYear, keyYear) in schedule" :key="keyYear">
+      <div v-for="(valYear, keyYear) in score" :key="keyYear">
         <yd-accordion-item v-for="(valTerm, keyTerm) in valYear" :title="keyYear + '学年 第' + keyTerm + '学期'" :key="keyTerm">
           <table class="score-table" cellspacing="0">
             <tr class="first-tr">
@@ -33,13 +33,6 @@
               <td>{{data.term_end_score}}</td>
               <td>{{data.all_score}}</td>
             </tr>
-            <tr>
-              <td>思想道德修养与法律基础</td>
-              <td>2.0</td>
-              <td>100</td>
-              <td>100</td>
-              <td>100</td>
-            </tr>
           </table>
         </yd-accordion-item>
       </div>
@@ -55,28 +48,57 @@ export default {
     async queryScore () {
       let userid = '20153320140'
       let pass = '130682qhy'
-      let res = await getScore(userid, pass)
-      this.schedule = res
+      this.$dialog.loading.open('正在查询，请稍后……')
+      // for (let resStatus = 500; resStatus === 200;) {
+      //   let res = await getScore(userid, pass)
+      // }
+      let i = 0
+      await getScore(userid, pass, i)
+        .then((res) => {
+          this.score = res
+          this.$dialog.loading.close()
+        })
+        .catch((err) => {
+          let status = err.response.status
+          if (status === 502) {
+            console.log(this)
+            this.$dialog.loading.close()
+            this.popout('服务器错误', '服务器错误，请联系管理员,错误码：1')
+          } else if (status === 500) {
+            if (i < 3) {
+              getScore(userid, pass, i)
+            } else {
+              this.popout('服务器错误', '服务器错误，请联系管理员，错误码：2')
+            }
+          }
+        })
     },
     limitTextLength: function (text, num) {
       if (text.length > num) {
         return text.substring(0, num - 3) + '…'
       }
       return text
-    }
+    },
+    popout: function (title, msg) {
+      this.$dialog.confirm({
+        title: title,
+        mes: msg,
+        opts: [
+          {
+            txt: '确定',
+            color: true
+          }
+        ]
+      })
+    },
   },
   data () {
     return {
-      schedule: null
+      score: null
     }
   },
   mounted () {
     this.queryScore()
-  },
-  watch: {
-    schedule: {
-      deep: true
-    }
   }
 }
 </script>
