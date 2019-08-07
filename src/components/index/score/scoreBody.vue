@@ -33,13 +33,6 @@
               <td>{{data.term_end_score}}</td>
               <td>{{data.all_score}}</td>
             </tr>
-            <tr>
-              <td>思想道德修养与法律基础</td>
-              <td>2.0</td>
-              <td>100</td>
-              <td>100</td>
-              <td>100</td>
-            </tr>
           </table>
         </yd-accordion-item>
       </div>
