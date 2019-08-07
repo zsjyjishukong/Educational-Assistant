@@ -111,7 +111,6 @@ export default {
       this.agreeShow = true
     },
     switchClick: function () {
-      console.log('swith click')
       this.isAgree = false
       this.$dialog.toast({
         mes: '请点击右侧“服务协议”并仔细阅读至底部',
@@ -128,14 +127,14 @@ export default {
     },
     bind: function () {
       sessionStorage.setItem('token', '1')
-      this.$router.push('/index')
       if (this.isAgree === true) {
         if (this.$refs.studentID.valid) {
-          this.$dialog.toast({
-            mes: '开始绑定',
-            timeout: 1500,
-            icon: 'success'
-          })
+          // this.$dialog.toast({
+          //   mes: '开始绑定',
+          //   timeout: 1500,
+          //   icon: 'success'
+          // })
+          this.$router.push('/index')
         } else {
           this.$dialog.toast({
             mes: '学号格式错误',
@@ -149,6 +148,7 @@ export default {
           timeout: 1500,
           icon: 'error'
         })
+        return false
       }
     }
   },
