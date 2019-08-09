@@ -66,7 +66,7 @@ export default {
             this.popout('服务器错误', '服务器错误，请联系管理员,错误码：1')
           } else if (status === 500) {
             if (i < 3) {
-              getScore(userid, pass, i)
+              getScore(userid, pass, i + 1)
             } else {
               this.popout('服务器错误', '服务器错误，请联系管理员，错误码：2')
             }

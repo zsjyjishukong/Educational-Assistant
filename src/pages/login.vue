@@ -1,7 +1,7 @@
 <template>
   <div id="login-page" style="height: 100%;">
     <yd-layout>
-      <div style="height: 15%;">
+      <div style="height: 100px;">
         <span id="title">
           <span id="welcome"></span>
           欢迎使用JY教务助手
