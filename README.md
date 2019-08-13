@@ -2,6 +2,9 @@
 正方教务系统
 
 ### Useage
+clone
 > git clone xxxx
+install
 > npm install 
+run
 > npm run dev
