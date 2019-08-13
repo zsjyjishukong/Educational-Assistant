@@ -6,6 +6,9 @@ import error from '@/pages/error'
 import aboutUs from '@/components/index/mine/aboutUs'
 import rewardUs from '@/components/index/mine/rewardUs'
 import privacy from '@/components/index/mine/privacy'
+import score from '@/components/index/score/scoreBody'
+import schedule from '@/components/index/schedule/scheduleBody'
+import mine from '@/components/index/mine/mine'
 
 Vue.use(Router)
 
@@ -19,7 +22,22 @@ export default new Router({
     {
       path: '/index',
       name: 'index',
-      component: index
+      component: index,
+      children: [
+        {
+          path: 'score',
+          name: 'score',
+          component: score
+        }, {
+          path: 'schedule',
+          name: 'schedule',
+          component: schedule
+        }, {
+          path: 'mine',
+          name: 'mine',
+          component: mine
+        }
+      ]
     },
     {
       path: '/about',

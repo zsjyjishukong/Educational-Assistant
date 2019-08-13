@@ -49,29 +49,16 @@ export default {
       let userid = '20153320140'
       let pass = '130682qhy'
       this.$dialog.loading.open('正在查询，请稍后……')
-      // for (let resStatus = 500; resStatus === 200;) {
-      //   let res = await getScore(userid, pass)
-      // }
       let i = 0
-      await getScore(userid, pass, i)
-        .then((res) => {
-          this.score = res
-          this.$dialog.loading.close()
-        })
-        .catch((err) => {
-          let status = err.response.status
-          if (status === 502) {
-            console.log(this)
-            this.$dialog.loading.close()
-            this.popout('服务器错误', '服务器错误，请联系管理员,错误码：1')
-          } else if (status === 500) {
-            if (i < 3) {
-              getScore(userid, pass, i + 1)
-            } else {
-              this.popout('服务器错误', '服务器错误，请联系管理员，错误码：2')
-            }
-          }
-        })
+      let res = await getScore(userid, pass, i)
+      while ('error' in res) {
+        res = await getScore(userid, pass, i)
+      }
+      this.handleScore(res)
+    },
+    handleScore: function (res) {
+      this.score = res
+      this.$dialog.loading.close()
     },
     limitTextLength: function (text, num) {
       if (text.length > num) {
@@ -90,7 +77,7 @@ export default {
           }
         ]
       })
-    },
+    }
   },
   data () {
     return {

@@ -5,19 +5,17 @@
         <yd-icon name="footmark" slot="right" style="color: #000;" v-if="actived === 1" @click.native="showSelectYear"></yd-icon>
       </yd-navbar>
       <div id="index-body" style="height: 100%">
-        <score-body v-if="actived === 0"></score-body>
-        <schedule-body v-if="actived === 1"></schedule-body>
-        <mine v-if="actived === 2"></mine>
+        <router-view ref="child"></router-view>
       </div>
 
       <yd-tabbar slot="tabbar">
-        <yd-tabbar-item title="成绩查询" link="#score" :active="actived === 0 ? true : false" @click.native="changeNavAndTab(0)">
+        <yd-tabbar-item title="成绩查询" link="/index/score" :active="actived === 0 ? true : false" @click.native="changeNavAndTab(0)">
           <yd-icon name="feedback" slot="icon"></yd-icon>
         </yd-tabbar-item>
-        <yd-tabbar-item title="课表查询" link="#schedule" :active="actived === 1 ? true : false" @click.native="changeNavAndTab(1)">
+        <yd-tabbar-item title="课表查询" link="/index/schedule" :active="actived === 1 ? true : false" @click.native="changeNavAndTab(1)">
           <yd-icon name="location" slot="icon"></yd-icon>
         </yd-tabbar-item>
-        <yd-tabbar-item title="个人中心" link="#mine" :active="actived === 2 ? true : false" @click.native="changeNavAndTab(2)">
+        <yd-tabbar-item title="个人中心" link="/index/mine" :active="actived === 2 ? true : false" @click.native="changeNavAndTab(2)">
           <yd-icon name="ucenter-outline" slot="icon"></yd-icon>
         </yd-tabbar-item>
       </yd-tabbar>
@@ -30,7 +28,7 @@
 <script>
 import 'vue-ydui/dist/ydui.base.css'
 import scoreBody from '../components/index/score/scoreBody'
-import scheduleBody from '../components/index/schedule/shcedule-body'
+import scheduleBody from '../components/index/schedule/scheduleBody'
 import mine from '../components/index/mine/mine'
 
 export default {
@@ -45,20 +43,22 @@ export default {
       hash: '',
       selectYearShow: false,
       selectTermShow: false,
+      selectedYear: '',
+      selectedTerm: '',
       selectYear: [
         {
-          label: '2018',
+          label: '2018-2019',
           callback: () => {
-            this.$dialog.toast({mes: '2018'})
             this.selectTermShow = true
+            this.selectedYear = '2018-2019'
             /* 注意： callback: function() {} 和 callback() {}  这样是无法正常使用当前this的 */
           }
         },
         {
-          label: '2019',
+          label: '2019-2020',
           callback: () => {
-            this.$dialog.toast({mes: '2019'})
             this.selectTermShow = true
+            this.selectedYear = '2019-2020'
             /* 注意： callback: function() {} 和 callback() {}  这样是无法正常使用当前this的 */
           }
         }
@@ -68,14 +68,16 @@ export default {
         {
           label: '第一学期',
           callback: () => {
-            this.$dialog.toast({mes: '第一学期'})
+            this.selectedTerm = 1
+            this.$refs.child.fatherQuerySchedule(this.selectedYear, this.selectedTerm)
             /* 注意： callback: function() {} 和 callback() {}  这样是无法正常使用当前this的 */
           }
         },
         {
           label: '第二学期',
           callback: () => {
-            this.$dialog.toast({mes: '第二学期'})
+            this.selectedTerm = 2
+            this.$refs.child.fatherQuerySchedule(this.selectedYear, this.selectedTerm)
             /* 注意： callback: function() {} 和 callback() {}  这样是无法正常使用当前this的 */
           }
         }
