@@ -25,6 +25,10 @@ export default new Router({
       component: index,
       children: [
         {
+          path: '/',
+          redirect: 'score'
+        },
+        {
           path: 'score',
           name: 'score',
           component: score

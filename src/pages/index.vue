@@ -121,20 +121,7 @@ export default {
     }
   },
   mounted: function () {
-    switch (this.$route.hash) {
-      case '#mine':
-        this.changeNavAndTab(2)
-        break
-      case '#schedule':
-        this.changeNavAndTab(1)
-        break
-      case '':
-        this.changeNavAndTab(0)
-        break
-      case '#score':
-        this.changeNavAndTab(0)
-        break
-    }
+    this.changeNavAndTab(0)
   }
 }
 </script>

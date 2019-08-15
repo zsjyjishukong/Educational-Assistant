@@ -129,11 +129,6 @@ export default {
       sessionStorage.setItem('token', '1')
       if (this.isAgree === true) {
         if (this.$refs.studentID.valid) {
-          // this.$dialog.toast({
-          //   mes: '开始绑定',
-          //   timeout: 1500,
-          //   icon: 'success'
-          // })
           this.$router.push('/index')
         } else {
           this.$dialog.toast({
@@ -141,6 +136,7 @@ export default {
             timeout: 1500,
             icon: 'error'
           })
+          return false
         }
       } else {
         this.$dialog.toast({
@@ -183,7 +179,10 @@ export default {
   #beta{
     font-family: "Adobe 黑体 Std R";
     font-size: 0.1rem;
-    color: #aaa;
+    background: #999;
+    padding: 2px 3px;
+    color: #fff;
+    border-radius: 3px;
   }
   .agree{
     color: #4395FF;
