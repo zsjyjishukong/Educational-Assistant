@@ -68,6 +68,9 @@ export default {
     openPage: function (url) {
       window.open(url, '_blank')
     }
+  },
+  mounted () {
+    this.$emit('changeNavAndTab', 2)
   }
 }
 </script>

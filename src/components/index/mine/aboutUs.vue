@@ -2,7 +2,7 @@
   <div class="about-us-page">
     <yd-layout>
       <yd-navbar slot="navbar" title="关于我们">
-        <router-link to="index/#mine" slot="left" style="cursor: pointer;">
+        <router-link to="index/mine" slot="left" style="cursor: pointer;">
           <yd-navbar-back-icon></yd-navbar-back-icon>
         </router-link>
       </yd-navbar>

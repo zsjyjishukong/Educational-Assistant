@@ -27,8 +27,8 @@
               <td>期末成绩</td>
               <td>总成绩</td>
             </tr>
-            <tr class="score-trs" v-for="(data, keyData) in valTerm" :key="keyData" @click="scoreTip()">
-              <td v-text="limitTextLength(data.lesson_name, 12)" @click="popoutScore(data)"></td>
+            <tr class="score-trs" v-for="(data, keyData) in valTerm" :key="keyData" @click="popoutScore(data)">
+              <td v-text="limitTextLength(data.lesson_name, 12)" class="lesson-name"></td>
               <td>{{data.point}}</td>
               <td>{{data.peace_score}}</td>
               <td>{{data.term_end_score}}</td>
@@ -83,9 +83,9 @@ export default {
     },
     popoutScore: function (scoreObj) {
       let title = scoreObj.lesson_name
-      let html = `<span class="green">课程代码：</span>${scoreObj.lesson_code}<br><span class="green">课程类型：</span>${scoreObj.lesson_nature}<br><span class="green">学分：</span>${scoreObj.credit}<br>` +
-                  `<span class="green">平时成绩：</span>${scoreObj.peace_score}<br><span class="green">期末成绩：</span>${scoreObj.term_end_score}<br><span class="green">总成绩：</span>${scoreObj.all_score}<br>` +
-                  `<span class="green">绩点：</span>${scoreObj.point}<br><span class="green">开课学院：</span>${scoreObj.teach_college}`
+      let html = `课程代码：${scoreObj.lesson_code}<br>课程类型：${scoreObj.lesson_nature}<br>学分：${scoreObj.credit}<br>` +
+                  `平时成绩：${scoreObj.peace_score}<br>期末成绩：${scoreObj.term_end_score}<br>总成绩：${scoreObj.all_score}<br>` +
+                  `绩点：${scoreObj.point}<br>开课学院：${scoreObj.teach_college}`
       this.popout(title, html)
     },
     popout: function (title, msg) {
@@ -121,6 +121,7 @@ export default {
   },
   mounted () {
     this.queryScore()
+    this.$emit('changeNavAndTab', 0)
   }
 }
 </script>
@@ -154,8 +155,5 @@ export default {
   }
   .score-trs{
     height: 0.6rem;
-  }
-  .green{
-    color: #4cd864;
   }
 </style>

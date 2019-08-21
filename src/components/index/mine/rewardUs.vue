@@ -2,7 +2,7 @@
   <div class="reward-us-page">
     <yd-layout>
       <yd-navbar slot="navbar" title="捐助我们">
-        <router-link to="index/#mine" slot="left" style="cursor: pointer;">
+        <router-link to="index/mine" slot="left" style="cursor: pointer;">
           <yd-navbar-back-icon></yd-navbar-back-icon>
         </router-link>
       </yd-navbar>

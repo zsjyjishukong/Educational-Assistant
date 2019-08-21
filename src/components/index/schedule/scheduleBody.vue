@@ -5,36 +5,12 @@
         <yd-flexbox class="title">
           <yd-flexbox-item>
             12周<br>
-            12月
+            {{month}}月
           </yd-flexbox-item>
-          <yd-flexbox-item>
-            周一<br>
-            1日
-          </yd-flexbox-item>
-          <yd-flexbox-item>
-            周二<br>
-            2日
-          </yd-flexbox-item>
-          <yd-flexbox-item>
-            周三<br>
-            3日
-          </yd-flexbox-item>
-          <yd-flexbox-item>
-            周四<br>
-            4日
-          </yd-flexbox-item>
-          <yd-flexbox-item>
-            周五<br>
-            5日
-          </yd-flexbox-item>
-          <yd-flexbox-item>
-            周六<br>
-            6日
-          </yd-flexbox-item>
-          <yd-flexbox-item>
-            周日<br>
-            7日
-          </yd-flexbox-item>
+              <yd-flexbox-item v-for="(i, key) in week" :key="i.getDate()">
+                {{day[key]}}<br>
+                {{i.getDate()}}日
+              </yd-flexbox-item>
         </yd-flexbox>
         <yd-flexbox class="body" v-for="i in 4" :key="i">
           <yd-flexbox-item>
@@ -118,7 +94,10 @@ export default {
         ]
       ],
       year: '2019-2020',
-      term: '1'
+      term: '1',
+      month: new Date().getMonth() + 1,
+      week: [],
+      day: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
     }
   },
   methods: {
@@ -140,7 +119,6 @@ export default {
     fatherQuerySchedule: function (year, term) {
       this.year = year
       this.term = term
-      console.log('daozhelile')
       this.querySchedule()
     },
     handleClasses: function (obj) {
@@ -162,10 +140,21 @@ export default {
       }
       this.classes = classArray
       this.$dialog.loading.close()
+    },
+    showWeekFirstDay: function () {
+      let nowDate = new Date()
+      let week = []
+      week[0] = new Date(nowDate - (nowDate.getDay() - 1) * 86400000)
+      for (let i = 1; i < 7; i++) {
+        week[i] = new Date(week[i - 1].getTime() + 86400000)
+      }
+      return week
     }
   },
   mounted () {
     this.querySchedule()
+    this.week = this.showWeekFirstDay()
+    this.$emit('changeNavAndTab', 1)
   }
 }
 </script>

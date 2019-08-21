@@ -5,7 +5,7 @@
         <yd-icon name="footmark" slot="right" style="color: #000;" v-if="actived === 1" @click.native="showSelectYear"></yd-icon>
       </yd-navbar>
       <div id="index-body" style="height: 100%">
-        <router-view ref="child"></router-view>
+        <router-view ref="child" v-on:changeNavAndTab="changeNavAndTab"></router-view>
       </div>
 
       <yd-tabbar slot="tabbar">
@@ -119,9 +119,6 @@ export default {
         })
       })
     }
-  },
-  mounted: function () {
-    this.changeNavAndTab(0)
   }
 }
 </script>
