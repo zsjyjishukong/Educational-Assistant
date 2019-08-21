@@ -4,7 +4,7 @@
       <div class="schedule">
         <yd-flexbox class="title">
           <yd-flexbox-item>
-            12周<br>
+            {{showNowWeek()}}<br>
             {{month}}月
           </yd-flexbox-item>
               <yd-flexbox-item v-for="(i, key) in week" :key="i.getDate()">
@@ -16,7 +16,7 @@
           <yd-flexbox-item>
             {{(2*i-1)}}-{{2*i}}
           </yd-flexbox-item>
-          <yd-flexbox-item v-for="j in 6" :key="j" :style="{background: classes[j-1][i-1].bgcolor ? classes[j-1][i-1].bgcolor : ''}">
+          <yd-flexbox-item v-for="j in 6" :key="j" :style="{background: classes[j-1][i-1].bgcolor ? classes[j-1][i-1].bgcolor : '', color: classes[j - 1][i - 1].color}">
             <div class="class-detail" >
               <div class="class-name">
                 {{classes[j-1][i-1].name}}
@@ -26,6 +26,9 @@
               </div>
               <div class="class-place">
                 {{classes[j-1][i-1].place}}
+              </div>
+              <div class="class-week">
+                {{classes[j-1][i-1].weeks}}
               </div>
             </div>
           </yd-flexbox-item>
@@ -45,59 +48,60 @@ export default {
       classes: [
         // 周一 1-4 节
         [
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'}
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}
         ],
         // 周二 1-4 节
         [
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'}
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}
         ],
         // 周三 1-4 节
         [
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'}
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}
         ],
         // 周四 1-4 节
         [
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'}
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}
         ],
         // 周五 1-4 节
         [
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'}
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}
         ],
         // 周六 1-4 节
         [
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'}
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}
         ],
         // 周日 1-4 节
         [
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'},
-          {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,0,0,0)'}
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'},
+          {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}
         ]
       ],
-      year: '2019-2020',
+      year: '2017-2018',
       term: '1',
       month: new Date().getMonth() + 1,
       week: [],
-      day: ['周一', '周二', '周三', '周四', '周五', '周六', '周日']
+      day: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
+      nowWeek: 0
     }
   },
   methods: {
@@ -126,13 +130,19 @@ export default {
       for (let i of obj) {
         let tmpArray = []
         for (let j of i) {
-          let tmp = {name: '', teacher: '', weeks: '', bgcolor: 'rgba(255,255,255,0)'}
+          let tmp = {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,255,255,0)'}
           if (j.length > 0) {
             let data = j[0]
             tmp.name = this.limitTextLength(data.name, 12)
             tmp.teacher = data.teacher
             tmp.place = data.place
-            tmp.bgcolor = data.color
+            if (this.inArray(this.nowWeek.toString(), data.weeks_arr)) {
+              tmp.bgcolor = data.color
+            } else {
+              tmp.color = 'rgb(157, 170, 176)'
+              tmp.bgcolor = 'rgba(243, 243, 243, 0.8)'
+            }
+            tmp.weeks = data.weeks_text
           }
           tmpArray.push(tmp)
         }
@@ -149,10 +159,37 @@ export default {
         week[i] = new Date(week[i - 1].getTime() + 86400000)
       }
       return week
+    },
+    queryNowWeek: function () { // 计算当前时间周数  school是开学时间
+      let schoolDate = '2019/07/08 00:00:00'
+      let dateBegin = new Date(schoolDate) // 转化为Date对象的形式
+      let dateEnd = new Date()
+      let between = dateEnd.getTime() - dateBegin.getTime()
+      let week = Math.ceil(Math.ceil(between / (24 * 3600 * 1000) / 7))
+      return week
+    },
+    showNowWeek: function () {
+      this.nowWeek = this.queryNowWeek()
+      if (this.nowWeek < 1 || this.nowWeek > 20) { // 计算中间时间
+        return '假期'
+      } else {
+        return '第' + this.nowWeek + '周'
+      }
+    },
+    inArray: function (str, array) {
+      if (str) {
+        for (let i in array) {
+          if (str.indexOf(array[i]) !== -1) {
+            return true
+          }
+        }
+      }
+      return false
     }
   },
   mounted () {
     this.querySchedule()
+    this.showNowWeek()
     this.week = this.showWeekFirstDay()
     this.$emit('changeNavAndTab', 1)
   }
@@ -211,6 +248,11 @@ export default {
     line-height: 15px;
   }
   .class-place{
+    font-size: 11px;
+    line-height: 15px;
+  }
+  .class-week{
+    font-size: 11px;
     line-height: 15px;
   }
 </style>
