@@ -96,7 +96,7 @@ export default {
           [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}]
         ]
       ],
-      year: '2017-2018',
+      year: '2019-2020',
       term: '1',
       month: new Date().getMonth() + 1,
       week: [],
