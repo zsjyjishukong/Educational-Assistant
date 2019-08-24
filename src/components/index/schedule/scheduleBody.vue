@@ -139,7 +139,7 @@ export default {
             tmp.teacher = data.teacher
             tmp.place = data.place
             tmp.weeks_arr = data.weeks_arr
-            if (this.inArray(this.nowWeek.toString(), data.weeks_arr)) {
+            if (this.inArray(this.nowWeek, data.weeks_arr)) {
               tmp.bgcolor = data.color
             } else {
               tmp.color = 'rgb(157, 170, 176)'
@@ -205,7 +205,7 @@ export default {
         let nowWeek = parseInt(week)
         for (; nowWeek < 21; nowWeek++) {
           for (let lesson of array) {
-            if (this.inArray(nowWeek.toString(), lesson.week_arr)) {
+            if (this.inArray(nowWeek.toString(), lesson.weeks_arr)) {
               return lesson
             }
           }
@@ -213,7 +213,7 @@ export default {
         nowWeek = parseInt(week)
         for (;nowWeek > 1; nowWeek--) {
           for (let lesson of array) {
-            if (this.inArray(nowWeek.toString(), lesson.week_arr)) {
+            if (this.inArray(nowWeek, lesson.week_arr)) {
               return lesson
             }
           }
