@@ -127,6 +127,23 @@ export default {
     },
     bind: function () {
       if (this.isAgree === true) {
+        console.log(this.$refs.studentID.valid)
+        if (!this.studentID) {
+          this.$dialog.toast({
+            mes: '请输入学号',
+            timeout: 1500,
+            icon: 'error'
+          })
+          return false
+        }
+        if (!this.password) {
+          this.$dialog.toast({
+            mes: '请输入密码',
+            timeout: 1500,
+            icon: 'error'
+          })
+          return false
+        }
         if (this.$refs.studentID.valid) {
           sessionStorage.setItem('token', '1')
           sessionStorage.setItem('studentId', this.studentID)

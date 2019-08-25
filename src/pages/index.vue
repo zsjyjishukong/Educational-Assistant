@@ -84,7 +84,9 @@ export default {
       ],
       student: {
         studentID: sessionStorage.getItem('studentId'),
-        password: sessionStorage.getItem('password')
+        password: sessionStorage.getItem('password'),
+        name: '查询中…',
+        collage: '查询中…'
       },
       errorArray: ['密码错误', '用户名不存在或未按照要求参加教学活动']
     }
