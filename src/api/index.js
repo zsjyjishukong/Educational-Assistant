@@ -5,3 +5,5 @@ const BASE_URL = '/api'
 export const getSchedule = (studentID, password, scheduleYear, scheduleTerm) => ajax(`${BASE_URL}/get_schedule`, {account: studentID, passwd: password, schedule_year: scheduleYear, schedule_term: scheduleTerm}, 'GET')
 
 export const getScore = (studentID, password) => ajax(`${BASE_URL}/get_score`, {account: studentID, passwd: password}, 'GET')
+
+export const getStudnetInfo = (studentID, password) => ajax(`${BASE_URL}/get_student_info`, {account: studentID, passwd: password})

@@ -5,7 +5,7 @@
         <yd-icon name="footmark" slot="right" style="color: #000;" v-if="actived === 1" @click.native="showSelectYear"></yd-icon>
       </yd-navbar>
       <div id="index-body" style="height: 100%">
-        <router-view ref="child" v-on:changeNavAndTab="changeNavAndTab"></router-view>
+        <router-view ref="child" v-on:changeNavAndTab="changeNavAndTab" :student="student"></router-view>
       </div>
 
       <yd-tabbar slot="tabbar">
@@ -30,6 +30,7 @@ import 'vue-ydui/dist/ydui.base.css'
 import scoreBody from '../components/index/score/scoreBody'
 import scheduleBody from '../components/index/schedule/scheduleBody'
 import mine from '../components/index/mine/mine'
+import {getStudnetInfo} from '../api/index'
 
 export default {
   name: 'index',
@@ -63,7 +64,6 @@ export default {
           }
         }
       ],
-
       selectTerm: [
         {
           label: '第一学期',
@@ -81,7 +81,12 @@ export default {
             /* 注意： callback: function() {} 和 callback() {}  这样是无法正常使用当前this的 */
           }
         }
-      ]
+      ],
+      student: {
+        studentID: sessionStorage.getItem('studentId'),
+        password: sessionStorage.getItem('password')
+      },
+      errorArray: ['密码错误', '用户名不存在或未按照要求参加教学活动']
     }
   },
   methods: {
@@ -101,7 +106,17 @@ export default {
     },
     showSelectYear: function () {
       this.selectYearShow = true
+    },
+    async queryStudentInfo () {
+      let res = await getStudnetInfo(this.student.studentID, this.student.password)
+      this.$set(this.student, 'name', res.student_name)
+      this.$set(this.student, 'collage', res.student_xy)
+      this.$set(this.student, 'major', res.student_zy)
+      this.$set(this.student, 'administrativeClass', res.student_xzb)
     }
+  },
+  mounted () {
+    this.queryStudentInfo()
   },
   watch: {
   },

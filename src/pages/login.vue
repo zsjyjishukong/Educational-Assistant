@@ -126,9 +126,11 @@ export default {
       }
     },
     bind: function () {
-      sessionStorage.setItem('token', '1')
       if (this.isAgree === true) {
         if (this.$refs.studentID.valid) {
+          sessionStorage.setItem('token', '1')
+          sessionStorage.setItem('studentId', this.studentID)
+          sessionStorage.setItem('password', this.password)
           this.$router.push('/index')
         } else {
           this.$dialog.toast({

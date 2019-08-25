@@ -7,9 +7,9 @@
             <img class="header-pic" src="./static/head.jpg">
           </div>
           <div class="user-info">
-            <div>姓名：齐昊宇</div>
-            <div>学院：信息管理系</div>
-            <div>专业：信息资源管理</div>
+            <div>姓名：{{student.name}}</div>
+            <div>学院：{{student.collage}}</div>
+            <div>专业：{{student.major}}</div>
           </div>
         </div>
       </div>
@@ -45,6 +45,11 @@
 <script>
 export default {
   name: 'mine',
+  props: {
+    student: {
+      type: Object
+    }
+  },
   data () {
     return {
     }

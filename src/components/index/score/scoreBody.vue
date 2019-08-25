@@ -3,7 +3,7 @@
     <div id="score-body">
       <div class="jd">
       <span class="name">
-        姓名：齐昊宇
+        姓名：{{student.name}}
       </span>
       <yd-countup
         endnum="3.4556"
@@ -13,7 +13,7 @@
         prefix="总绩点："
       ></yd-countup>
       <span class="name">
-        学院：信息管理系
+        学院：{{student.collage}}
       </span>
     </div>
       <yd-accordion>
@@ -44,18 +44,24 @@
 
 <script>
 import {getScore} from '../../../api/index'
+
 export default {
   name: 'scoreBody',
+  props: {
+    student: {
+      type: Object
+    }
+  },
   methods: {
     async queryScore () {
       this.$dialog.loading.open('正在查询……')
       let i = 1
-      let res = await getScore(this.userid, this.pass)
-      while ('error' in res) {
+      let res = await getScore(this.student.studentID, this.student.password)
+      while (res.error) {
         if (this.inArray(res.error, this.errorArray)) {
           break
         } else if (i < 3) {
-          res = await getScore(this.userid, this.pass)
+          res = await getScore(this.student.studentID, this.student.password)
           i++
         } else {
           res = false
@@ -114,8 +120,6 @@ export default {
   data () {
     return {
       score: null,
-      userid: '20153320140',
-      pass: '130682qhy',
       errorArray: ['密码错误', '用户名不存在或未按照要求参加教学活动']
     }
   },

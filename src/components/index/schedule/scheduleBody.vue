@@ -43,6 +43,11 @@ import {getSchedule} from '../../../api/index'
 
 export default {
   name: 'schedule-body',
+  props: {
+    student: {
+      type: Object
+    }
+  },
   data () {
     return {
       classes: [
@@ -115,9 +120,9 @@ export default {
     async querySchedule () {
       // this.classes = []
       this.$dialog.loading.open('正在查询……')
-      let res = await getSchedule('20173400117', '130132wzf', this.year, this.term)
+      let res = await getSchedule(this.student.studentID, this.student.password, this.year, this.term)
       while ('error' in res) {
-        res = await getSchedule('20173400117', '130132wzf', this.year, this.term)
+        res = await getSchedule(this.student.studentID, this.student.password, this.year, this.term)
       }
       this.handleClasses(res.schedule)
     },
