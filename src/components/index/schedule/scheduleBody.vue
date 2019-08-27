@@ -186,7 +186,6 @@ export default {
       }
     },
     inArray: function (str, array) {
-      debugger
       if (str) {
         for (let i in array) {
           if (str.toString().indexOf(array[i]) !== -1) {
