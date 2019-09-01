@@ -197,7 +197,7 @@ export default {
     inArray: function (str, array) {
       if (str) {
         for (let i in array) {
-          if (str.indexOf(array[i]) !== -1) {
+          if (str.toString().indexOf(array[i]) !== -1) {
             return true
           }
         }
@@ -264,9 +264,13 @@ export default {
 .title{
   background: #777;
   padding: 0.1rem 0;
+  height: 8%;
+}
+.body{
+  height: 23%;
 }
 .body .yd-flexbox-item:nth-child(1){
-  height: 2.66rem;
+  height: 100%;
   vertical-align: center;
   line-height: 2.61rem;
   border-right: 0.5px solid #fff;
