@@ -56,12 +56,21 @@ export default {
     async queryScore () {
       this.$dialog.loading.open('正在查询……')
       let i = 1
-      let res = await getScore(this.student.studentID, this.student.password)
+      let res = await getScore()
+      if (res.code === 2) {
+        this.$dialog.toast({
+          mes: '未登录，请重新登录',
+          timeout: 1500,
+          icon: 'error'
+        })
+        document.cookie = 'token='
+        this.$router.push('/')
+      }
       while (res.error) {
         if (this.inArray(res.error, this.errorArray)) {
           break
         } else if (i < 3) {
-          res = await getScore(this.student.studentID, this.student.password)
+          res = await getScore()
           i++
         } else {
           res = false

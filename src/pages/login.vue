@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import {login} from '../api/login'
+import {login, isBind, bind} from '../api/login'
 
 export default {
   name: 'login',
@@ -102,6 +102,27 @@ export default {
     async login (studentID, password) {
       let res = await login(studentID, password)
       return res
+    },
+    async toBind () {
+      let res = await bind(this.studentID, this.password)
+      if (res.code === 0) {
+        this.$router.push('/index')
+      } else {
+        this.$dialog.toast({
+          mes: res.msg,
+          timeout: 1500,
+          icon: 'error'
+        })
+      }
+    },
+    async isBinding () {
+      let res = await isBind()
+      let isBinding = res.data.isBind
+      if (isBinding) {
+        this.$router.push('/index')
+      } else {
+        console.log(false)
+      }
     },
     showAgree: function () {
       this.$dialog.toast({
@@ -146,9 +167,7 @@ export default {
         }
         if (this.$refs.studentID.valid) {
           sessionStorage.setItem('token', '1')
-          sessionStorage.setItem('studentId', this.studentID)
-          sessionStorage.setItem('password', this.password)
-          this.$router.push('/index')
+          this.toBind()
         } else {
           this.$dialog.toast({
             mes: '学号格式错误',
@@ -165,9 +184,29 @@ export default {
         })
         return false
       }
+    },
+    wechatLogin: function () {
+      if (this.getCookie('token')) {
+        this.isBinding()
+      } else {
+        window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
+      }
+    },
+    getCookie: function (cname) {
+      let name = cname + '='
+      let ca = document.cookie.split(';')
+      for (let i = 0; i < ca.length; i++) {
+        let c = ca[i].trim()
+        if (c.indexOf(name) === 0) {
+          return c.substring(name.length, c.length)
+        }
+        return ''
+      }
     }
   },
   mounted () {
+    sessionStorage.setItem('token', '1')
+    this.wechatLogin()
   }
 }
 </script>

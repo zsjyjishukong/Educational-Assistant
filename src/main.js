@@ -4,6 +4,7 @@ import Vue from 'vue'
 import App from './App'
 import router from './router'
 import YDUI from 'vue-ydui'
+import qs from 'qs'
 import 'vue-ydui/dist/ydui.rem.css'
 import { Confirm, Alert, Toast, Notify, Loading } from 'vue-ydui/dist/lib.rem/dialog'
 
@@ -16,6 +17,8 @@ Vue.prototype.$dialog = {
   notify: Notify,
   loading: Loading
 }
+Vue.use(qs)
+Vue.prototype.$qs = qs
 
 /* eslint-disable no-new */
 new Vue({

@@ -120,9 +120,18 @@ export default {
     async querySchedule () {
       // this.classes = []
       this.$dialog.loading.open('正在查询……')
-      let res = await getSchedule(this.student.studentID, this.student.password, this.year, this.term)
+      let res = await getSchedule(this.year, this.term)
       while ('error' in res) {
-        res = await getSchedule(this.student.studentID, this.student.password, this.year, this.term)
+        res = await getSchedule(this.year, this.term)
+      }
+      if (res.code === 2) {
+        this.$dialog.toast({
+          mes: '未登录，请重新登录',
+          timeout: 1500,
+          icon: 'error'
+        })
+        document.cookie = 'token='
+        this.$router.push('/')
       }
       this.handleClasses(res.schedule)
     },
