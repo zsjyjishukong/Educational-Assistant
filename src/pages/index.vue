@@ -30,7 +30,7 @@ import 'vue-ydui/dist/ydui.base.css'
 import scoreBody from '../components/index/score/scoreBody'
 import scheduleBody from '../components/index/schedule/scheduleBody'
 import mine from '../components/index/mine/mine'
-import {getStudnetInfo} from '../api/index'
+import requestIndex from '../api/index.js'
 
 export default {
   name: 'index',
@@ -70,7 +70,6 @@ export default {
           callback: () => {
             this.selectedTerm = 1
             this.$refs.child.fatherQuerySchedule(this.selectedYear, this.selectedTerm)
-            /* 注意： callback: function() {} 和 callback() {}  这样是无法正常使用当前this的 */
           }
         },
         {
@@ -110,7 +109,7 @@ export default {
       this.selectYearShow = true
     },
     async queryStudentInfo () {
-      let res = await getStudnetInfo(this.student.studentID, this.student.password)
+      let res = await requestIndex.getStudentInfo(this.student.studentID, this.student.password)
       this.$set(this.student, 'name', res.student_name)
       this.$set(this.student, 'collage', res.student_xy)
       this.$set(this.student, 'major', res.student_zy)
@@ -119,23 +118,6 @@ export default {
   },
   mounted () {
     this.queryStudentInfo()
-  },
-  watch: {
-  },
-  beforeRouteEnter: function (to, from, next) {
-    if (sessionStorage.getItem('token') && sessionStorage.getItem('token').length === 1) {
-      console.log('通过')
-      next()
-    } else {
-      console.log('未通过')
-      next(vm => {
-        vm.$dialog.toast({
-          mes: '参数错误，请重新登陆',
-          timeout: 5000,
-          icon: 'error'
-        })
-      })
-    }
   }
 }
 </script>

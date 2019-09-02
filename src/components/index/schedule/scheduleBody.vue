@@ -39,7 +39,7 @@
 </template>
 
 <script>
-import {getSchedule} from '../../../api/index'
+import requestSchedule from '../../../api/index'
 
 export default {
   name: 'schedule-body',
@@ -120,9 +120,9 @@ export default {
     async querySchedule () {
       // this.classes = []
       this.$dialog.loading.open('正在查询……')
-      let res = await getSchedule(this.year, this.term)
+      let res = await requestSchedule.getSchedule(this.year, this.term)
       while ('error' in res) {
-        res = await getSchedule(this.year, this.term)
+        res = await requestSchedule.getSchedule(this.year, this.term)
       }
       if (res.code === 2) {
         this.$dialog.toast({

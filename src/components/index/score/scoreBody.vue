@@ -43,7 +43,7 @@
 </template>
 
 <script>
-import {getScore} from '../../../api/index'
+import requestScore from '../../../api/index'
 
 export default {
   name: 'scoreBody',
@@ -56,7 +56,7 @@ export default {
     async queryScore () {
       this.$dialog.loading.open('正在查询……')
       let i = 1
-      let res = await getScore()
+      let res = await requestScore.getScore()
       if (res.code === 2) {
         this.$dialog.toast({
           mes: '未登录，请重新登录',
@@ -70,7 +70,7 @@ export default {
         if (this.inArray(res.error, this.errorArray)) {
           break
         } else if (i < 3) {
-          res = await getScore()
+          res = await requestScore.getScore()
           i++
         } else {
           res = false
