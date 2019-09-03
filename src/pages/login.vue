@@ -117,11 +117,15 @@ export default {
     },
     async isBinding () {
       let res = await isBind()
-      let isBinding = res.data.isBind
-      if (isBinding) {
-        this.$router.push('/index')
+      if (res.code === 2) {
+        window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
       } else {
-        console.log(false)
+        let isBinding = res.data.isBind
+        if (isBinding) {
+          this.$router.push('/index')
+        } else {
+          console.log(false)
+        }
       }
     },
     showAgree: function () {
