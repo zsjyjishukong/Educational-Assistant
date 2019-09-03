@@ -189,7 +189,7 @@ export default {
       if (this.getCookie('token')) {
         this.isBinding()
       } else {
-        // window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
+        window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
       }
     },
     getCookie: function (cname) {
