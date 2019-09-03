@@ -7,13 +7,13 @@
             {{showNowWeek()}}<br>
             {{month}}月
           </yd-flexbox-item>
-              <yd-flexbox-item v-for="(i, key) in week" :key="i.getDate()">
-                {{day[key]}}<br>
-                {{i.getDate()}}日
-              </yd-flexbox-item>
+          <yd-flexbox-item v-for="(i, key) in week" :key="i.getDate()">
+            {{day[key]}}<br>
+            {{i.getDate()}}日
+          </yd-flexbox-item>
         </yd-flexbox>
         <yd-flexbox class="body" v-for="i in 4" :key="i">
-          <yd-flexbox-item>
+          <yd-flexbox-item class="lesson_num">
             {{(2*i-1)}}-{{2*i}}
           </yd-flexbox-item>
           <yd-flexbox-item v-for="j in 6" :key="j" :style="{background: calculateClassForOddOrEven(classes[j-1][i-1]).bgcolor, color: calculateClassForOddOrEven(classes[j-1][i-1]).color}">
@@ -248,23 +248,28 @@ export default {
 <style scoped>
 #schedule-body{
   height: 100%;
-  background-image: url("scorebg.jpg");
+  background-image: url("katong.jpg");
+  background-size: 100% 100%;
 }
 .blur {
-  background: rgba(0, 0, 0, .3);
+  background: rgba(0, 0, 0, .1);
 }
 .yd-flexbox-item{
   text-align: center;
   user-select: none;
+}
+.lesson_num{
+  border-bottom: 1px solid #fff;
 }
 .schedule{
   color: #eee;
   height: 100%;
 }
 .title{
-  background: #777;
+  background: none;
   padding: 0.1rem 0;
   height: 8%;
+  border-bottom: 1px solid #fff;
 }
 .body{
   height: 23%;
@@ -286,7 +291,7 @@ export default {
 {
   background: rgba(0,0,0,.5);
   border-radius: 0.1rem;
-  height: 2.5rem;
+  height: 96%;
   display: flex;
   justify-content:center;
   align-items:Center;

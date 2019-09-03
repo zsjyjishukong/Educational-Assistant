@@ -4,7 +4,7 @@
       <div id="user-detail">
         <div class="user-detail-content">
           <div class="header-pic-father">
-            <img class="header-pic" src="./static/head.jpg">
+            <img class="header-pic" :src=student.img>
           </div>
           <div class="user-info">
             <div>姓名：{{student.name}}</div>
@@ -23,19 +23,19 @@
       </div>
       <yd-slider autoplay="3000">
         <yd-slider-item>
-          <a @click="openPage('http://www.ydcss.com')"  >
+          <a @click="uploadNotify">
             <img src="./static/slider1.jpg">
           </a>
         </yd-slider-item>
         <yd-slider-item>
-          <a @click="uploadNotify">
+          <!--<a @click="#">-->
             <img src="./static/slider2.jpg">
-          </a>
+          <!--</a>-->
         </yd-slider-item>
         <yd-slider-item>
-          <a @click="openPage('http://pz.wendu.com/')">
+          <!--<a @click="#">-->
             <img src="./static/slider3.jpg">
-          </a>
+          <!--</a>-->
         </yd-slider-item>
       </yd-slider>
     </div>
@@ -68,7 +68,7 @@ export default {
       })
     },
     uploadNotify: function () {
-      this.popout('v0.0.1更新公告', '<p>【新增】成绩查询、课表查询</p><p>【解决】密码含有特殊字符无法登陆的bug</p>')
+      this.popout('v0.0.2更新公告', '<p>【新增】成绩查询、课表查询、微信绑定</p>')
     },
     openPage: function (url) {
       window.open(url, '_blank')
@@ -98,7 +98,7 @@ export default {
     margin: 0 auto;
   }
   .user-detail-content .header-pic {
-    border: 1px solid #07B3F9;
+    border: 1px solid #44c125;
     border-radius: 30px;
     width: 60px;
     float: left;

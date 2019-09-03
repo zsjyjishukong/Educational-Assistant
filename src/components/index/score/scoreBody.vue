@@ -6,7 +6,7 @@
         姓名：{{student.name}}
       </span>
       <yd-countup
-        endnum="3.4556"
+        :endnum="score.all_college.pjzjd"
         duration="2"
         decimals="2"
         separator=","
@@ -15,9 +15,10 @@
       <span class="name">
         学院：{{student.collage}}
       </span>
+
     </div>
       <yd-accordion>
-      <div v-for="(valYear, keyYear) in score" :key="keyYear">
+      <div v-for="(valYear, keyYear) in score.score_info" :key="keyYear">
         <yd-accordion-item v-for="(valTerm, keyTerm) in valYear" :title="keyYear + '学年 第' + keyTerm + '学期'" :key="keyTerm">
           <table class="score-table" cellspacing="0">
             <tr class="first-tr">
@@ -43,59 +44,18 @@
 </template>
 
 <script>
-import requestScore from '../../../api/index'
 
 export default {
   name: 'scoreBody',
   props: {
     student: {
       type: Object
+    },
+    score: {
+      type: Object
     }
   },
   methods: {
-    async queryScore () {
-      this.$dialog.loading.open('正在查询……')
-      let i = 1
-      let res = await requestScore.getScore()
-      if (res.code === 2) {
-        this.$dialog.toast({
-          mes: '未登录，请重新登录',
-          timeout: 1500,
-          icon: 'error'
-        })
-        document.cookie = 'token='
-        this.$router.push('/')
-      }
-      while (res.error) {
-        if (this.inArray(res.error, this.errorArray)) {
-          break
-        } else if (i < 3) {
-          res = await requestScore.getScore()
-          i++
-        } else {
-          res = false
-        }
-      }
-      this.handleScore(res)
-    },
-    handleScore: function (res) {
-      if (res) {
-        if (this.inArray(res.error, this.errorArray)) {
-          this.popout('出错了', res.error)
-        } else {
-          this.score = res
-        }
-      } else {
-        this.popout('服务器错误', '服务器错误，请联系管理员')
-      }
-      this.$dialog.loading.close()
-    },
-    limitTextLength: function (text, num) {
-      if (text.length > num) {
-        return text.substring(0, num - 3) + '…'
-      }
-      return text
-    },
     popoutScore: function (scoreObj) {
       let title = scoreObj.lesson_name
       let html = `课程代码：${scoreObj.lesson_code}<br>课程类型：${scoreObj.lesson_nature}<br>学分：${scoreObj.credit}<br>` +
@@ -115,25 +75,19 @@ export default {
         ]
       })
     },
-    inArray: function (str, array) {
-      if (str) {
-        for (let i in array) {
-          if (str.indexOf(array[i]) !== -1) {
-            return true
-          }
-        }
+    limitTextLength: function (text, num) {
+      if (text.length > num) {
+        return text.substring(0, num - 3) + '…'
       }
-      return false
+      return text
     }
   },
   data () {
     return {
-      score: null,
       errorArray: ['密码错误', '用户名不存在或未按照要求参加教学活动']
     }
   },
   mounted () {
-    this.queryScore()
     this.$emit('changeNavAndTab', 0)
   }
 }
