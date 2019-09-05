@@ -11,5 +11,8 @@ export default {
   },
   async getStudentInfo () {
     return ajax(`${BASE_URL}/get_student_info`)
+  },
+  async unbind () {
+    return ajax(`${BASE_URL}/user_untying`)
   }
 }

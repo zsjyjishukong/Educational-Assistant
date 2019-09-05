@@ -1,24 +1,20 @@
 <template>
   <div class="reward-us-page">
-    <yd-layout>
-      <yd-navbar slot="navbar" title="捐助我们">
-        <router-link to="index/mine" slot="left" style="cursor: pointer;">
-          <yd-navbar-back-icon></yd-navbar-back-icon>
-        </router-link>
-      </yd-navbar>
-      <div class="logo">
-        <img src="./static/shoukuanma.png" alt="" width="30%">
-      </div>
-      <div class="describe">
-        如果您觉得好用，请长按识别二维码捐助我们
-      </div>
-    </yd-layout>
-  </div>
+    <div class="logo">
+      <img src="./static/shoukuanma.png" alt="" width="30%">
+    </div>
+    <div class="describe">
+      如果您觉得好用，请长按识别二维码捐助我们
+    </div>
+</div>
 </template>
 
 <script>
 export default {
-  name: 'rewardUs'
+  name: 'rewardUs',
+  mounted () {
+    this.$emit('changeNavAndTab', {tabShow: false, showId: 2, title: '捐助我们', leftShow: true, rightShow: false, leftLink: './mine'})
+  }
 }
 </script>
 

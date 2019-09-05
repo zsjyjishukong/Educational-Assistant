@@ -240,7 +240,7 @@ export default {
     this.querySchedule()
     this.showNowWeek()
     this.week = this.showWeekFirstDay()
-    this.$emit('changeNavAndTab', 1)
+    this.$emit('changeNavAndTab', {tabShow: true, showId: 1, title: '课表查询', leftShow: false, rightShow: true, leftLink: ''})
   }
 }
 </script>

@@ -14,12 +14,12 @@
         </div>
       </div>
       <div class="user-selects">
-        <div class="user-select" @click="$router.push('/privacy')">隐私设置 <span class="right-arrow"></span></div>
-        <div class="user-select" @click="$router.push('/reward')">打赏我们 <span class="right-arrow"></span></div>
-        <div class="user-select" @click="$router.push('/about')">关于我们 <span class="right-arrow"></span></div>
+        <div class="user-select" @click="$router.push('./privacy')">隐私设置 <span class="right-arrow"></span></div>
+        <div class="user-select" @click="$router.push('./reward')">打赏我们 <span class="right-arrow"></span></div>
+        <div class="user-select" @click="$router.push('./about')">关于我们 <span class="right-arrow"></span></div>
       </div>
       <div class="unbind">
-        <yd-button size="large" type="danger">解除绑定</yd-button>
+        <yd-button size="large" type="danger" @click.native="confirmUnbind">解除绑定</yd-button>
       </div>
       <yd-slider autoplay="3000">
         <yd-slider-item>
@@ -43,6 +43,7 @@
 </template>
 
 <script>
+import request from '../../../api/index'
 export default {
   name: 'mine',
   props: {
@@ -72,10 +73,32 @@ export default {
     },
     openPage: function (url) {
       window.open(url, '_blank')
+    },
+    confirmUnbind: function () {
+      this.$dialog.confirm({
+        title: '危险动作确认',
+        mes: '确定要解除绑定吗？解绑后您将无法使用我们的服务！',
+        opts: () => {
+          this.unbind()
+        }
+      })
+    },
+    async unbind () {
+      let res = await request.unbind()
+      if (res.code === 0) {
+        this.$dialog.toast({
+          mes: '解绑成功，再见！',
+          timeout: 1500,
+          icon: 'success',
+          callback: () => {
+            this.$router.push('/')
+          }
+        })
+      }
     }
   },
   mounted () {
-    this.$emit('changeNavAndTab', 2)
+    this.$emit('changeNavAndTab', {tabShow: true, showId: 2, title: '我的', leftShow: false, rightShow: false, leftLink: ''})
   }
 }
 </script>

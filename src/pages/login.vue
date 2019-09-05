@@ -11,7 +11,7 @@
       <yd-cell-group style="width: 95%; margin: auto">
         <yd-cell-item>
           <span slot="left">学号：</span>
-          <yd-input slot="right" ref="studentID" v-model="studentID" regex="20\d{9}" placeholder="请输入您的学号"></yd-input>
+          <yd-input slot="right" ref="studentID" v-model="studentID" regex="^20\d{9}$" placeholder="请输入您的学号"></yd-input>
         </yd-cell-item>
         <yd-cell-item>
           <span slot="left">密码：</span>
@@ -118,7 +118,7 @@ export default {
     async isBinding () {
       let res = await isBind()
       if (res.code === 2) {
-        window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
+        // window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
       } else {
         let isBinding = res.data.isBind
         if (isBinding) {
@@ -193,7 +193,7 @@ export default {
       if (this.getCookie('token')) {
         this.isBinding()
       } else {
-        window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
+        // window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
       }
     },
     getCookie: function (cname) {

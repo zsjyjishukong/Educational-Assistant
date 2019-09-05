@@ -2,13 +2,17 @@
   <div id="index-page" style="height: 100%;">
     <yd-layout>
       <yd-navbar slot="navbar" :title="title" id="navbar">
-        <yd-icon name="footmark" slot="right" style="color: #000;" v-if="actived === 1" @click.native="showSelectYear"></yd-icon>
+        <router-link :to="leftLink" slot="left" v-if="leftShow">
+          <yd-navbar-back-icon></yd-navbar-back-icon>
+        </router-link>
+        <yd-icon name="footmark" slot="right" style="color: #000;" v-if="rightShow" @click.native="showSelectYear"></yd-icon>
       </yd-navbar>
       <div id="index-body" style="height: 100%">
-        <router-view ref="child" v-on:changeNavAndTab="changeNavAndTab" :student="student" :score="score"></router-view>
+        <router-view ref="child" v-on:changeNavAndTab="changeNavAndTab"
+                     :student="student" :score="score" v-on:queryScore="queryScore"></router-view>
       </div>
 
-      <yd-tabbar slot="tabbar">
+      <yd-tabbar slot="tabbar" v-if="tabbarShow">
         <yd-tabbar-item title="成绩查询" link="/index/score" :active="actived === 0 ? true : false" @click.native="changeNavAndTab(0)">
           <yd-icon name="feedback" slot="icon"></yd-icon>
         </yd-tabbar-item>
@@ -46,6 +50,9 @@ export default {
       selectTermShow: false,
       selectedYear: '',
       selectedTerm: '',
+      leftShow: false,
+      leftLink: '',
+      rightShow: false,
       selectYear: [
         {
           label: '2017-2018',
@@ -96,23 +103,28 @@ export default {
         collage: '查询中…'
       },
       errorArray: ['密码错误', '用户名不存在或未按照要求参加教学活动'],
-      score: null
+      score: {
+        point: 0,
+        score_info: {}
+      },
+      tabbarShow: true
     }
   },
   methods: {
-    changeNavAndTab: function (id) {
-      this.actived = id
-      switch (id) {
-        case 0:
-          this.title = '成绩查询'
-          break
-        case 1:
-          this.title = '课表查询'
-          break
-        case 2:
-          this.title = '我的'
-          break
-      }
+    changeNavAndTab: function (obj) {
+      /*
+        {
+          tabShow: true/false,
+          showId: 0/1/2,
+          title: ''
+        }
+      */
+      this.actived = obj.showId
+      this.tabbarShow = obj.tabShow
+      this.title = obj.title
+      this.leftShow = obj.leftShow
+      this.leftLink = obj.leftLink
+      this.rightShow = obj.rightShow
     },
     showSelectYear: function () {
       this.selectYearShow = true
@@ -131,7 +143,7 @@ export default {
       }
     },
     async queryScore () {
-      this.$dialog.loading.open('正在查询……')
+      // this.$dialog.loading.open('正在查询……')
       let i = 1
       let res = await requestIndex.getScore()
       if (res.code === 2) {
@@ -170,7 +182,22 @@ export default {
         if (this.inArray(res.error, this.errorArray)) {
           this.popout('出错了', res.error)
         } else {
-          this.score = res
+          let score = {}
+          if (res.data) {
+            for (let i of res.data) {
+              if (!score[i.year]) {
+                score[i.year] = {}
+              }
+              if (!score[i.year][i.term]) {
+                score[i.year][i.term] = []
+              }
+              score[i.year][i.term].push(i)
+            }
+          }
+          debugger
+          this.$set(this.score, 'score_info', score)
+          this.$set(this.score, 'point', res.point ? res.point : 0)
+          console.log(this.score)
         }
       } else {
         this.popout('服务器错误', `服务器错误，请联系管理员<br>${res.error}`)

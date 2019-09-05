@@ -1,21 +1,17 @@
 <template>
   <div class="privacy-us-page">
-    <yd-layout>
-      <yd-navbar slot="navbar" title="隐私设置">
-        <router-link to="index/mine" slot="left" style="cursor: pointer;">
-          <yd-navbar-back-icon></yd-navbar-back-icon>
-        </router-link>
-      </yd-navbar>
       <div class="describe">
         暂未开放，敬请期待
       </div>
-    </yd-layout>
   </div>
 </template>
 
 <script>
 export default {
-  name: 'privacy'
+  name: 'privacy',
+  mounted () {
+    this.$emit('changeNavAndTab', {tabShow: false, showId: 2, title: '隐私设置', leftShow: true, rightShow: false, leftLink: './mine'})
+  }
 }
 </script>
 

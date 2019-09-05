@@ -6,7 +6,7 @@
         姓名：{{student.name}}
       </span>
       <yd-countup
-        :endnum="score.all_college.pjzjd"
+        :endnum="score.point"
         duration="2"
         decimals="2"
         separator=","
@@ -18,6 +18,9 @@
 
     </div>
       <yd-accordion>
+      <div class="no-score" v-if="isEmptyObject(score.score_info)">
+        暂无成绩
+      </div>
       <div v-for="(valYear, keyYear) in score.score_info" :key="keyYear">
         <yd-accordion-item v-for="(valTerm, keyTerm) in valYear" :title="keyYear + '学年 第' + keyTerm + '学期'" :key="keyTerm">
           <table class="score-table" cellspacing="0">
@@ -80,6 +83,12 @@ export default {
         return text.substring(0, num - 3) + '…'
       }
       return text
+    },
+    isEmptyObject: function (obj) {
+      for (let i in obj) {
+        return false
+      }
+      return true
     }
   },
   data () {
@@ -88,7 +97,10 @@ export default {
     }
   },
   mounted () {
-    this.$emit('changeNavAndTab', 0)
+    this.$emit('changeNavAndTab', {tabShow: true, showId: 0, title: '成绩查询', leftShow: false, rightShow: false, leftLink: ''})
+    if (!this.score) {
+      this.$emit('queryScore')
+    }
   }
 }
 </script>
@@ -122,5 +134,12 @@ export default {
   }
   .score-trs{
     height: 0.6rem;
+  }
+  .no-score{
+    margin-top: 10%;
+    background: #f5f5f5;
+    text-align: center;
+    color: #ccc;
+    font-size: 18px;
   }
 </style>
