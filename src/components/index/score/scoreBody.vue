@@ -33,7 +33,7 @@
             </tr>
             <tr class="score-trs" v-for="(data, keyData) in valTerm" :key="keyData" @click="popoutScore(data)">
               <td v-text="limitTextLength(data.lesson_name, 12)" class="lesson-name"></td>
-              <td>{{data.point}}</td>
+              <td>{{data.credit}}</td>
               <td>{{data.peace_score}}</td>
               <td>{{data.term_end_score}}</td>
               <td>{{data.all_score}}</td>
@@ -61,9 +61,15 @@ export default {
   methods: {
     popoutScore: function (scoreObj) {
       let title = scoreObj.lesson_name
-      let html = `课程代码：${scoreObj.lesson_code}<br>课程类型：${scoreObj.lesson_nature}<br>学分：${scoreObj.credit}<br>` +
-                  `平时成绩：${scoreObj.peace_score}<br>期末成绩：${scoreObj.term_end_score}<br>总成绩：${scoreObj.all_score}<br>` +
-                  `绩点：${scoreObj.point}<br>开课学院：${scoreObj.teach_college}`
+      let html = `课程代码：${scoreObj.lesson_code}<br>课程类型：${scoreObj.lesson_type}<br>学分：${scoreObj.credit}<br>` +
+                  `平时成绩：${scoreObj.peace_score}<br>期末成绩：${scoreObj.term_end_score}<br>总成绩：${scoreObj.all_score}<br>`
+      if (scoreObj.make_up_score) {
+        html += `补考成绩：${scoreObj.make_up_score}`
+      }
+      if (scoreObj.rebuild_score) {
+        html += `重修成绩：${scoreObj.rebuild_score}`
+      }
+      html += `绩点：${scoreObj.point}<br>开课学院：${scoreObj.teach_college}`
       this.popout(title, html)
     },
     popout: function (title, msg) {
@@ -79,6 +85,9 @@ export default {
       })
     },
     limitTextLength: function (text, num) {
+      if (!text) {
+        return ''
+      }
       if (text.length > num) {
         return text.substring(0, num - 3) + '…'
       }

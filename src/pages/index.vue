@@ -184,17 +184,16 @@ export default {
         } else {
           let score = {}
           if (res.data) {
-            for (let i of res.data) {
-              if (!score[i.year]) {
-                score[i.year] = {}
+            res.data.forEach(function (item, index) {
+              if (!score[item['year']]) {
+                score[item['year']] = {}
               }
-              if (!score[i.year][i.term]) {
-                score[i.year][i.term] = []
+              if (!score[item['year']][item['term']]) {
+                score[item['year']][item['term']] = []
               }
-              score[i.year][i.term].push(i)
-            }
+              score[item['year']][item.term].push(item)
+            })
           }
-          debugger
           this.$set(this.score, 'score_info', score)
           this.$set(this.score, 'point', res.point ? res.point : 0)
           console.log(this.score)
