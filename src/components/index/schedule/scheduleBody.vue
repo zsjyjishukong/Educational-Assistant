@@ -133,40 +133,17 @@ export default {
         document.cookie = 'token='
         this.$router.push('/')
       }
-      this.handleClasses(res.schedule)
+      this.handleClasses(res.data)
     },
     fatherQuerySchedule: function (year, term) {
       this.year = year
       this.term = term
       this.querySchedule()
     },
-    handleClasses: function (obj) {
-      let classArray = []
-      for (let i of obj) {
-        let tmpArray = []
-        for (let j of i) {
-          let tmpArray1 = []
-          for (let k of j) {
-            let tmp = {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,255,255,0)'}
-            let data = k
-            tmp.name = this.limitTextLength(data.name, 12)
-            tmp.teacher = data.teacher
-            tmp.place = data.place
-            tmp.weeks_arr = data.weeks_arr
-            if (this.inArray(this.nowWeek, data.weeks_arr)) {
-              tmp.bgcolor = data.color
-            } else {
-              tmp.color = 'rgb(157, 170, 176)'
-              tmp.bgcolor = 'rgba(243, 243, 243, 0.8)'
-            }
-            tmp.weeks = data.weeks_text
-            tmpArray1.push(tmp)
-          }
-          tmpArray.push(tmpArray1)
-        }
-        classArray.push(tmpArray)
-      }
-      this.classes = classArray
+    handleClasses: function (arr) {
+      arr.forEach((val, key) => {
+        this.classes[parseInt(val.day)][parseInt(val.lesson)].push(val)
+      })
       this.$dialog.loading.close()
     },
     showWeekFirstDay: function () {
@@ -248,7 +225,7 @@ export default {
 <style scoped>
 #schedule-body{
   height: 100%;
-  background-image: url("katong.jpg");
+  background-image: url("hello.jpg");
   background-size: 100% 100%;
 }
 .blur {
