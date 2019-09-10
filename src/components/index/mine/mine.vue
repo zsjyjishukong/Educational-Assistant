@@ -69,7 +69,7 @@ export default {
       })
     },
     uploadNotify: function () {
-      this.popout('v0.0.2更新公告', '<p>【新增】成绩查询、课表查询、微信绑定</p>')
+      this.popout('v0.0.3更新公告', '<p>【新增】数据库存储服务，让你在教务系统不能使用时亦可以查到自己的成绩</p>')
     },
     openPage: function (url) {
       window.open(url, '_blank')

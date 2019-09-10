@@ -118,7 +118,7 @@ export default {
     async isBinding () {
       let res = await isBind()
       if (res.code === 2) {
-        // window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
+        window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
       } else {
         let isBinding = res.data.isBind
         if (isBinding) {
@@ -152,7 +152,6 @@ export default {
     },
     bind: function () {
       if (this.isAgree === true) {
-        console.log(this.$refs.studentID.valid)
         if (!this.studentID) {
           this.$dialog.toast({
             mes: '请输入学号',
@@ -193,7 +192,7 @@ export default {
       if (this.getCookie('token')) {
         this.isBinding()
       } else {
-        // window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
+        window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
       }
     },
     getCookie: function (cname) {

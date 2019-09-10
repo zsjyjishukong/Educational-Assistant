@@ -16,7 +16,7 @@
           <yd-flexbox-item class="lesson_num">
             {{(2*i-1)}}-{{2*i}}
           </yd-flexbox-item>
-          <yd-flexbox-item v-for="j in 6" :key="j" :style="{background: calculateClassForOddOrEven(classes[j-1][i-1]).bgcolor, color: calculateClassForOddOrEven(classes[j-1][i-1]).color}">
+          <yd-flexbox-item v-for="j in 7" :key="j" :style="{background: setOpacity(calculateClassForOddOrEven(classes[j-1][i-1]).bgcolor), color: calculateClassForOddOrEven(classes[j-1][i-1]).color}">
             <div class="class-detail">
               <div class="class-name">
                 {{calculateClassForOddOrEven(classes[j-1][i-1]).name}}
@@ -117,10 +117,29 @@ export default {
       }
       return text
     },
+    setOpacity: function (bgcolor) {
+      if (bgcolor === 'rgba(255,0,0,0)') {
+        return 'none'
+      } else {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(bgcolor)
+        return result ? `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}, 0.8)` : null
+      }
+    },
     async querySchedule () {
       // this.classes = []
       this.$dialog.loading.open('正在查询……')
-      let res = await requestSchedule.getSchedule(this.year, this.term)
+      let res = ''
+      try {
+        res = await requestSchedule.getSchedule(this.year, this.term)
+      } catch (e) {
+        this.$dialog.loading.close()
+        this.$dialog.toast({
+          type: 'error',
+          mes: '请求服务器失败'
+        })
+        console.log(e)
+        return false
+      }
       while ('error' in res) {
         res = await requestSchedule.getSchedule(this.year, this.term)
       }
@@ -141,6 +160,57 @@ export default {
       this.querySchedule()
     },
     handleClasses: function (arr) {
+      this.classes = [
+        // 周一 1-4 节
+        [
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}]
+        ],
+        // 周二 1-4 节
+        [
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}]
+        ],
+        // 周三 1-4 节
+        [
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}]
+        ],
+        // 周四 1-4 节
+        [
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}]
+        ],
+        // 周五 1-4 节
+        [
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}]
+        ],
+        // 周六 1-4 节
+        [
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}]
+        ],
+        // 周日 1-4 节
+        [
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}],
+          [{name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,0,0,0)'}]
+        ]
+      ]
       arr.forEach((val, key) => {
         this.classes[parseInt(val.day)][parseInt(val.lesson)].push(val)
       })
@@ -243,7 +313,7 @@ export default {
   height: 100%;
 }
 .title{
-  background: none;
+  background: rgba(0, 0, 0, .1);
   padding: 0.1rem 0;
   height: 8%;
   border-bottom: 1px solid #fff;
@@ -257,6 +327,7 @@ export default {
   line-height: 2.61rem;
   border-right: 0.5px solid #fff;
   width: 50%;
+  background: rgba(0, 0, 0, .1)
 }
 .body .yd-flexbox-item:nth-of-type(2),
 .body .yd-flexbox-item:nth-of-type(3),

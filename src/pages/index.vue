@@ -13,13 +13,13 @@
       </div>
 
       <yd-tabbar slot="tabbar" v-if="tabbarShow">
-        <yd-tabbar-item title="成绩查询" link="/index/score" :active="actived === 0 ? true : false" @click.native="changeNavAndTab(0)">
+        <yd-tabbar-item title="成绩查询" link="/index/score" :active="actived === 0 ? true : false">
           <yd-icon name="feedback" slot="icon"></yd-icon>
         </yd-tabbar-item>
-        <yd-tabbar-item title="课表查询" link="/index/schedule" :active="actived === 1 ? true : false" @click.native="changeNavAndTab(1)">
+        <yd-tabbar-item title="课表查询" link="/index/schedule" :active="actived === 1 ? true : false">
           <yd-icon name="location" slot="icon"></yd-icon>
         </yd-tabbar-item>
-        <yd-tabbar-item title="个人中心" link="/index/mine" :active="actived === 2 ? true : false" @click.native="changeNavAndTab(2)">
+        <yd-tabbar-item title="个人中心" link="/index/mine" :active="actived === 2 ? true : false">
           <yd-icon name="ucenter-outline" slot="icon"></yd-icon>
         </yd-tabbar-item>
       </yd-tabbar>
