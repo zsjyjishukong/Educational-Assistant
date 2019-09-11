@@ -17,6 +17,7 @@
         <div class="user-select" @click="$router.push('./privacy')">隐私设置 <span class="right-arrow"></span></div>
         <div class="user-select" @click="$router.push('./reward')">打赏我们 <span class="right-arrow"></span></div>
         <div class="user-select" @click="$router.push('./about')">关于我们 <span class="right-arrow"></span></div>
+        <div class="user-select" @click="$router.push('./calendar')">查看日历 <span class="right-arrow"></span></div>
       </div>
       <div class="unbind">
         <yd-button size="large" type="danger" @click.native="confirmUnbind">解除绑定</yd-button>
@@ -136,7 +137,7 @@ export default {
     float: left;
     display: inline;
     width: 60%;
-    padding-left: 15%;
+    padding-left: 10%;
     font-size: 12px;
     line-height: 20px;
     color: #44C125;
