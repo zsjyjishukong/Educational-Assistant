@@ -137,6 +137,9 @@ export default {
         this.$set(this.student, 'major', res.data.student_zy)
         this.$set(this.student, 'administrativeClass', res.data.student_xzb)
         this.$set(this.student, 'img', res.data.img)
+      } else if (res.code === 1) {
+        this.queryStudentInfo()
+        return true
       } else if (res.code === 2) {
         document.cookie = 'token='
         this.$router.push('/')
