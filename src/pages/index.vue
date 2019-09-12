@@ -199,7 +199,6 @@ export default {
           }
           this.$set(this.score, 'score_info', score)
           this.$set(this.score, 'point', res.point ? res.point : 0)
-          console.log(this.score)
         }
       } else {
         this.popout('服务器错误', `服务器错误，请联系管理员<br>${res.error}`)
