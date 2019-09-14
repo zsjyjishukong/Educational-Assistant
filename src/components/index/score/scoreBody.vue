@@ -34,7 +34,7 @@
             <tr class="score-trs" v-for="(data, keyData) in valTerm" :key="keyData" @click="popoutScore(data)">
               <td v-text="limitTextLength(data.lesson_name, 12)" class="lesson-name"></td>
               <td>{{data.credit}}</td>
-              <td>{{data.peace_score}}</td>
+              <td>{{data.usual_score}}</td>
               <td>{{data.term_end_score}}</td>
               <td>{{data.all_score}}</td>
             </tr>
