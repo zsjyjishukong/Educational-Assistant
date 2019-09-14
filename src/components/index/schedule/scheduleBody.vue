@@ -19,7 +19,7 @@
           <yd-flexbox-item v-for="j in 7" :key="j" :style="{background: setOpacity(calculateClassForOddOrEven(classes[j-1][i-1]).bgcolor), color: calculateClassForOddOrEven(classes[j-1][i-1]).color}">
             <div class="class-detail">
               <div class="class-name">
-                {{calculateClassForOddOrEven(classes[j-1][i-1]).name}}
+                {{limitTextLength(calculateClassForOddOrEven(classes[j-1][i-1]).name, 12)}}
               </div>
               <div class="class-teacher">
                 {{calculateClassForOddOrEven(classes[j-1][i-1]).teacher}}
