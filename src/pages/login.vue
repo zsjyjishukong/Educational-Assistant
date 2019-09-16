@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import {login, isBind, bind} from '../api/login'
+import {isBind, bind} from '../api/login'
 
 export default {
   name: 'login',
@@ -99,10 +99,6 @@ export default {
     }
   },
   methods: {
-    async login (studentID, password) {
-      let res = await login(studentID, password)
-      return res
-    },
     async toBind () {
       let res = await bind(this.studentID, this.password)
       if (res.code === 0) {
