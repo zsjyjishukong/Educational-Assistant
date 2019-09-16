@@ -107,7 +107,8 @@ export default {
         point: 0,
         score_info: {}
       },
-      tabbarShow: true
+      tabbarShow: true,
+      queryScoreRetry: 0
     }
   },
   methods: {
@@ -146,9 +147,20 @@ export default {
       }
     },
     async queryScore () {
-      // this.$dialog.loading.open('正在查询……')
+      if (this.queryScoreRetry === 6) {
+        this.popout('服务器错误', '查成绩服务错误，请重试……<br>如多次出现，请联系管理员')
+      }
+      this.$dialog.loading.open('正在查询……')
+      let res = ''
       let i = 1
-      let res = await requestIndex.getScore()
+      try {
+        res = await requestIndex.getScore()
+      } catch (e) {
+        this.$dialog.loading.close()
+        this.queryScoreRetry += 1
+        this.queryScore()
+        return true
+      }
       if (res.code === 2) {
         this.$dialog.toast({
           mes: '未登录，请重新登录',
