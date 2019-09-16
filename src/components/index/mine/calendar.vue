@@ -5,12 +5,10 @@
         <template
           slot="dateCell"
           slot-scope="{date, data}">
-          {{isRest(date)}}
           <a class="date">{{ date.getDate()}}</a>
-          <a v-if="isShowRest" class="rest" >休</a>
+          <a v-if="isDay(date)" :class="isDay(date).isRest === true ? 'rest' : 'study'" >{{isDay(date).isRest === true ? '休' : '班'}}</a>
           <a v-else=""></a>
-          <br>
-          <a class="holiday">{{isHoliday(date)}}</a>
+          <div class="name" v-if="isDay(date)">{{isDay(date).name}}</div>
         </template>
       </el-calendar>
   </div>
@@ -19,91 +17,69 @@
 // import CalendarData from '../../../api/CalendarData'
 export default {
   name: 'calendar',
-  props: {
-    msg: String
-  },
   data () {
     return {
+      holidayData: {
+        2019: {
+          9: {
+            13: {
+              name: '中秋节',
+              isRest: true
+            },
+            29: {
+              name: '',
+              isRest: false
+            },
+            30: {
+              name: '',
+              isRest: true
+            }
+          },
+          10: {
+            1: {
+              name: '国庆节',
+              isRest: true
+            },
+            2: {
+              name: '',
+              isRest: true
+            },
+            3: {
+              name: '',
+              isRest: true
+            },
+            4: {
+              name: '',
+              isRest: true
+            },
+            5: {
+              name: '',
+              isRest: true
+            },
+            6: {
+              name: '',
+              isRest: true
+            }
+          }
+        }
+      },
       isShowRest: ''
     }
   },
   methods: {
-    isHoliday: function (date) {
-      let dada = date.getDate()
-      let month = date.getMonth()
-      let year = date.getYear()
-      if (month === 9 && dada === 1) {
-        return '国庆节'
-      }
-      if (month === 4 && dada === 1) {
-        return '劳动节'
-      }
-      if (year === 119) {
-        if (month === 8 && dada === 13) {
-          return '中秋'
-        } else {
-          return ''
-        }
-      } else if (year === 120) {
-        if (month === 0 && dada === 1) {
-          return '元旦'
-        } else if (month === 3 && dada === 4) {
-          return '清明节'
-        } else if (month === 5 && dada === 25) {
-          return '端午节'
-        } else {
-          return ''
+    isDay: function (nowDate) {
+      let date = nowDate.getDate()
+      let month = nowDate.getMonth()
+      let year = nowDate.getFullYear()
+      month = month + 1
+      if (this.holidayData[year]) {
+        if (this.holidayData[year][month]) {
+          if (this.holidayData[year][month][date]) {
+            return this.holidayData[year][month][date]
+          }
         }
       }
-    },
-    isRest: function (date) {
-      let day = date.getDay()
-      let dada = date.getDate()
-      let month = date.getMonth()
-      let year = date.getYear()
-      if (year === 119 && month >= 7) {
-        if (day === 0 || day === 6) {
-          this.isShowRest = true
-          this.isShowStudy = false
-        } else if (month === 8 && dada === 13) {
-          this.isShowRest = true
-          this.isShowStudy = false
-        } else if (month === 9 && (dada >= 1 && dada <= 6)) {
-          this.isShowRest = true
-          this.isShowStudy = false
-        } else {
-          this.isShowRest = false
-        }
-        if (month === 8 && (dada >= 28 && dada <= 29)) {
-          this.isShowRest = false
-          this.isShowStudy = false
-        }
-      } else if (year === 120 && month <= 7) {
-        if (day === 0 || day === 6) {
-          this.isShowRest = true
-          this.isShowStudy = false
-        } else if (month === 0 && dada === 1) {
-          this.isShowRest = true
-        } else if (month === 4 && dada === 1) {
-          this.isShowRest = true
-        } else if (month === 5 && dada === 25) {
-          this.isShowRest = true
-        } else if (month === 0 && dada >= 13) {
-          this.isShowRest = true
-        } else if (month === 1 && dada <= 23) {
-          this.isShowRest = true
-        } else if (month === 6 && dada >= 13) {
-          this.isShowRest = true
-        } else if (month === 7 && dada <= 23) {
-          this.isShowRest = true
-        } else {
-          this.isShowRest = false
-          this.isShowStudy = false
-        }
-      } else {
-        this.isShowRest = false
-        this.isShowStudy = false
-      }
+      return false
     }
   },
   mounted () {
@@ -116,6 +92,10 @@ export default {
   .date{
     margin-left: 5px;
     font-size: 15px;
+  }
+  .name{
+    margin: 50% 0;
+    color: #aaa;
   }
   .rest{
     float: right;
