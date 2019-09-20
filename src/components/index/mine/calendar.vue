@@ -40,7 +40,7 @@ export default {
               name: '国庆节',
               isRest: true
             },
-            2: {
+            '2-9': {
               name: '',
               isRest: true
             },
