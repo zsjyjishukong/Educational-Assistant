@@ -181,10 +181,7 @@ export default {
       if (this.getCookie('token')) {
         this.isBinding()
       } else {
-        this.$dialog.loading.open('跳转登录中……')
-        setTimeout(() => {
-          window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
-        }, 1000)
+        window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
       }
     },
     getCookie: function (cname) {
