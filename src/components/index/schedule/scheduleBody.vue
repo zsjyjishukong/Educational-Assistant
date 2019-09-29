@@ -19,7 +19,7 @@
           <yd-flexbox-item v-for="j in 7" :key="j" :style="{background: setOpacity(calculateClassForOddOrEven(classes[j-1][i-1]).bgcolor), color: calculateClassForOddOrEven(classes[j-1][i-1]).color}">
             <div class="class-detail">
               <div class="class-name">
-                {{calculateClassForOddOrEven(classes[j-1][i-1]).name}}
+                {{limitTextLength(calculateClassForOddOrEven(classes[j-1][i-1]).name, 12)}}
               </div>
               <div class="class-teacher">
                 {{calculateClassForOddOrEven(classes[j-1][i-1]).teacher}}
@@ -121,8 +121,8 @@ export default {
       if (bgcolor === 'rgba(255,0,0,0)') {
         return 'none'
       } else {
-        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(bgcolor)
-        return result ? `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}, 0.8)` : null
+        let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(bgcolor)
+        return result ? `rgba(${parseInt(result[1], 16)}, ${parseInt(result[2], 16)}, ${parseInt(result[3], 16)}, 0.8)` : null
       }
     },
     async querySchedule () {

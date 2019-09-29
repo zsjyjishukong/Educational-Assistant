@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import {login, isBind, bind} from '../api/login'
+import {isBind, bind} from '../api/login'
 
 export default {
   name: 'login',
@@ -99,10 +99,6 @@ export default {
     }
   },
   methods: {
-    async login (studentID, password) {
-      let res = await login(studentID, password)
-      return res
-    },
     async toBind () {
       let res = await bind(this.studentID, this.password)
       if (res.code === 0) {
@@ -118,7 +114,11 @@ export default {
     async isBinding () {
       let res = await isBind()
       if (res.code === 2) {
+<<<<<<< HEAD
         // window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
+=======
+        // window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
+>>>>>>> 75bf05474c442443bca86a9508c3d58a6a103f44
       } else {
         let isBinding = res.data.isBind
         if (isBinding) {
@@ -192,7 +192,7 @@ export default {
       if (this.getCookie('token')) {
         this.isBinding()
       } else {
-        // window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
+        // window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
       }
     },
     getCookie: function (cname) {

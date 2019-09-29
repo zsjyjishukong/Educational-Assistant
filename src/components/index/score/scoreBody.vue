@@ -34,7 +34,7 @@
             <tr class="score-trs" v-for="(data, keyData) in valTerm" :key="keyData" @click="popoutScore(data)">
               <td v-text="limitTextLength(data.lesson_name, 12)" class="lesson-name"></td>
               <td>{{data.credit}}</td>
-              <td>{{data.peace_score}}</td>
+              <td>{{data.usual_score}}</td>
               <td>{{data.term_end_score}}</td>
               <td>{{data.all_score}}</td>
             </tr>
@@ -61,8 +61,8 @@ export default {
   methods: {
     popoutScore: function (scoreObj) {
       let title = scoreObj.lesson_name
-      let html = `课程代码：${scoreObj.lesson_code}<br>课程类型：${scoreObj.lesson_type}<br>学分：${scoreObj.credit}<br>` +
-                  `平时成绩：${scoreObj.peace_score}<br>期末成绩：${scoreObj.term_end_score}<br>总成绩：${scoreObj.all_score}<br>`
+      let html = `课程代码：${scoreObj.code}<br>课程类型：${scoreObj.type}<br>学分：${scoreObj.credit}<br>` +
+                  `平时成绩：${scoreObj.usual_score}<br>期末成绩：${scoreObj.term_end_score}<br>总成绩：${scoreObj.all_score}<br>`
       if (scoreObj.make_up_score) {
         html += `补考成绩：${scoreObj.make_up_score}`
       }
@@ -115,9 +115,6 @@ export default {
 </script>
 
 <style scoped>
-  #score-body{
-    /*height: 100%;*/
-  }
   .jd{
     text-align: center;
     padding-top: 0.3rem;
@@ -139,7 +136,6 @@ export default {
   }
   .first-tr td{
     border-bottom: 1px solid #44c125;
-    mso-cellspacing: 0;
   }
   .score-trs{
     height: 0.6rem;

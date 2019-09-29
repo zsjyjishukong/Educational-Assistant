@@ -9,6 +9,7 @@ import privacy from '@/components/index/mine/privacy'
 import score from '@/components/index/score/scoreBody'
 import schedule from '@/components/index/schedule/scheduleBody'
 import mine from '@/components/index/mine/mine'
+import calendar from '@/components/index/mine/calendar'
 
 Vue.use(Router)
 
@@ -52,6 +53,10 @@ export default new Router({
           path: 'reward',
           name: rewardUs,
           component: rewardUs
+        }, {
+          path: 'calendar',
+          name: 'calendar',
+          component: calendar
         }
       ]
     },

@@ -29,6 +29,7 @@ export default {
   name: 'aboutUs',
   methods: {
     openUrl: function (url) {
+      this.$dialog.loading.open('正在跳转……')
       window.open(url, '_self')
     }
   },
