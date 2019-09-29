@@ -131,13 +131,6 @@ export default {
       })
       this.agreeShow = true
     },
-    switchClick: function () {
-      this.isAgree = false
-      this.$dialog.toast({
-        mes: '请点击右侧“服务协议”并仔细阅读至底部',
-        timeout: 2000
-      })
-    },
     agreeOrNot: function (choose) {
       this.agreeShow = false
       if (choose === 'true') {
@@ -202,8 +195,8 @@ export default {
         if (c.indexOf(name) === 0) {
           return c.substring(name.length, c.length)
         }
-        return ''
       }
+      return ''
     }
   },
   mounted () {
