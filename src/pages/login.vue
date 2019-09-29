@@ -112,13 +112,10 @@ export default {
       }
     },
     async isBinding () {
+      debugger
       let res = await isBind()
       if (res.code === 2) {
-<<<<<<< HEAD
-        // window.open('http://myserver.qihaoyu.tech/api/set_code', '_self')
-=======
         // window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
->>>>>>> 75bf05474c442443bca86a9508c3d58a6a103f44
       } else {
         let isBinding = res.data.isBind
         if (isBinding) {
@@ -134,13 +131,6 @@ export default {
         timeout: 2000
       })
       this.agreeShow = true
-    },
-    switchClick: function () {
-      this.isAgree = false
-      this.$dialog.toast({
-        mes: '请点击右侧“服务协议”并仔细阅读至底部',
-        timeout: 2000
-      })
     },
     agreeOrNot: function (choose) {
       this.agreeShow = false
@@ -194,17 +184,19 @@ export default {
       } else {
         // window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
       }
+      console.log(this.getCookie('token'))
     },
     getCookie: function (cname) {
       let name = cname + '='
       let ca = document.cookie.split(';')
+      debugger
       for (let i = 0; i < ca.length; i++) {
         let c = ca[i].trim()
         if (c.indexOf(name) === 0) {
           return c.substring(name.length, c.length)
         }
-        return ''
       }
+      return ''
     }
   },
   mounted () {

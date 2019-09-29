@@ -43,15 +43,15 @@ export default new Router({
           component: mine
         }, {
           path: 'about',
-          name: aboutUs,
+          name: 'aboutUs',
           component: aboutUs
         }, {
           path: 'privacy',
-          name: privacy,
+          name: 'privacy',
           component: privacy
         }, {
           path: 'reward',
-          name: rewardUs,
+          name: 'rewardUs',
           component: rewardUs
         }, {
           path: 'calendar',
