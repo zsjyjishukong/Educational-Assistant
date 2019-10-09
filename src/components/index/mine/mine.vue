@@ -70,7 +70,7 @@ export default {
       })
     },
     uploadNotify: function () {
-      this.popout('v0.0.3更新公告', '<p>【新增】数据库存储服务，让你在教务系统不能使用时亦可以查到自己的成绩</p>')
+      this.popout('v0.0.1.0更新公告', '<p>【新增】2019-2020学年日历，让你掌握自己的假期</p>')
     },
     openPage: function (url) {
       window.open(url, '_blank')
@@ -88,7 +88,7 @@ export default {
       let res = await request.unbind()
       if (res.code === 0) {
         this.$dialog.toast({
-          mes: '解绑成功，再见！',
+          mes: '解绑成功，期待您的下次使用！',
           timeout: 1500,
           icon: 'success',
           callback: () => {

@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-// import CalendarData from '../../../api/CalendarData'
+
 export default {
   name: 'calendar',
   data () {
@@ -35,7 +35,7 @@ export default {
           dateRange: '2019.9.28-2019.9.29',
           isRest: false,
           showDate: '2019.9.28',
-          showText: '补课'
+          showText: '调休'
         }, {
           dateRange: '2020.1.1',
           isRest: true,
@@ -124,7 +124,7 @@ export default {
     }
   },
   mounted () {
-    this.$emit('changeNavAndTab', {tabShow: false, showId: 2, title: '2019-2020学年校历', leftShow: true, rightShow: false, leftLink: './mine'})
+    this.$emit('changeNavAndTab', {tabShow: false, showId: 2, title: '2019-2020学年日历', leftShow: true, rightShow: false, leftLink: './mine'})
     this.configToData()
   }
 }
