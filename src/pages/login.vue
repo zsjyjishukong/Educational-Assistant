@@ -112,7 +112,6 @@ export default {
       }
     },
     async isBinding () {
-      debugger
       let res = await isBind()
       if (res.code === 2) {
         // window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
@@ -189,7 +188,6 @@ export default {
     getCookie: function (cname) {
       let name = cname + '='
       let ca = document.cookie.split(';')
-      debugger
       for (let i = 0; i < ca.length; i++) {
         let c = ca[i].trim()
         if (c.indexOf(name) === 0) {
