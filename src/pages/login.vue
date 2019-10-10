@@ -114,7 +114,7 @@ export default {
     async isBinding () {
       let res = await isBind()
       if (res.code === 2) {
-        // window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
+        window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
       } else {
         let isBinding = res.data.isBind
         if (isBinding) {
@@ -181,7 +181,7 @@ export default {
       if (this.getCookie('token')) {
         this.isBinding()
       } else {
-        // window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
+        window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
       }
     },
     getCookie: function (cname) {
