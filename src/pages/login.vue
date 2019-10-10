@@ -183,7 +183,6 @@ export default {
       } else {
         // window.open('http://jws.qihaoyu.tech/api/set_code', '_self')
       }
-      console.log(this.getCookie('token'))
     },
     getCookie: function (cname) {
       let name = cname + '='
