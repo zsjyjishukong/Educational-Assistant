@@ -14,7 +14,7 @@
   </div>
 </template>
 <script>
-// import CalendarData from '../../../api/CalendarData'
+
 export default {
   name: 'calendar',
   data () {
@@ -22,14 +22,44 @@ export default {
       holidayData: {},
       holidayConfig: [
         {
-          dateRange: '2019.10.1-2019.10.31',
+          dateRange: '2019.9.13-2019.9.15',
+          isRest: true,
+          showDate: '2019.9.13',
+          showText: '中秋'
+        }, {
+          dateRange: '2019.9.30-2019.10.7',
           isRest: true,
           showDate: '2019.10.1',
           showText: '国庆'
         }, {
+          dateRange: '2019.9.28-2019.9.29',
+          isRest: false,
+          showDate: '2019.9.28',
+          showText: '调休'
+        }, {
           dateRange: '2020.1.1',
           isRest: true,
           showText: '元旦'
+        }, {
+          dateRange: '2020.1.13-2020.2.23',
+          isRest: true,
+          showDate: '2020.1.13',
+          showText: '寒假'
+        }, {
+          dateRange: '2020.4.4-2020.4.5',
+          isRest: true,
+          showDate: '2020.4.4',
+          showText: '清明节'
+        }, {
+          dateRange: '2020.5.1-2020.5.3',
+          isRest: true,
+          showDate: '2020.5.1',
+          showText: '劳动节'
+        }, {
+          dateRange: '2020.7.13-2020.8.23',
+          isRest: true,
+          showDate: '2020.7.13',
+          showText: '暑假'
         }
       ],
       isShowRest: ''
@@ -94,7 +124,7 @@ export default {
     }
   },
   mounted () {
-    this.$emit('changeNavAndTab', {tabShow: false, showId: 2, title: '2019-2020学年校历', leftShow: true, rightShow: false, leftLink: './mine'})
+    this.$emit('changeNavAndTab', {tabShow: false, showId: 2, title: '2019-2020学年日历', leftShow: true, rightShow: false, leftLink: './mine'})
     this.configToData()
   }
 }

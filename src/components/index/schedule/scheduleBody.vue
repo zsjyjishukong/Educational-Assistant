@@ -222,7 +222,7 @@ export default {
 <style scoped>
 #schedule-body{
   height: 100%;
-  background-image: url("hello.jpg");
+  background-image: url("katong.jpg");
   background-size: 100% 100%;
 }
 .blur {
