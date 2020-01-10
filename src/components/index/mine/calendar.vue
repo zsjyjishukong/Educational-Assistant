@@ -5,7 +5,7 @@
         <template
           slot="dateCell"
           slot-scope="{date, data}">
-          <a class="date">{{ date.getDate()}}</a>
+          <a class="date">{{ date.getDate() }}</a>
           <a v-if="isDay(date)" :class="isDay(date).isRest === true ? 'rest' : 'study'" >{{isDay(date).isRest === true ? '休' : '班'}}</a>
           <a v-else=""></a>
           <div class="name" v-if="isDay(date)">{{isDay(date).name}}</div>
@@ -22,43 +22,43 @@ export default {
       holidayData: {},
       holidayConfig: [
         {
-          dateRange: '2019.9.13-2019.9.15',
+          dateRange: '2019.09.13-2019.09.15',
           isRest: true,
-          showDate: '2019.9.13',
+          showDate: '2019.09.13',
           showText: '中秋'
         }, {
-          dateRange: '2019.9.30-2019.10.7',
+          dateRange: '2019.09.30-2019.10.07',
           isRest: true,
-          showDate: '2019.10.1',
+          showDate: '2019.10.01',
           showText: '国庆'
         }, {
-          dateRange: '2019.9.28-2019.9.29',
+          dateRange: '2019.09.28-2019.09.29',
           isRest: false,
-          showDate: '2019.9.28',
+          showDate: '2019.09.28',
           showText: '调休'
         }, {
-          dateRange: '2020.1.1',
+          dateRange: '2020.01.01',
           isRest: true,
           showText: '元旦'
         }, {
-          dateRange: '2020.1.13-2020.2.23',
+          dateRange: '2020.01.13-2020.02.23',
           isRest: true,
-          showDate: '2020.1.13',
+          showDate: '2020.01.13',
           showText: '寒假'
         }, {
-          dateRange: '2020.4.4-2020.4.5',
+          dateRange: '2020.04.04-2020.04.05',
           isRest: true,
-          showDate: '2020.4.4',
+          showDate: '2020.04.04',
           showText: '清明节'
         }, {
-          dateRange: '2020.5.1-2020.5.3',
+          dateRange: '2020.05.01-2020.05.03',
           isRest: true,
-          showDate: '2020.5.1',
+          showDate: '2020.05.01',
           showText: '劳动节'
         }, {
-          dateRange: '2020.7.13-2020.8.23',
+          dateRange: '2020.07.13-2020.08.23',
           isRest: true,
-          showDate: '2020.7.13',
+          showDate: '2020.07.13',
           showText: '暑假'
         }
       ],
@@ -69,8 +69,12 @@ export default {
     isDay: function (nowDate) {
       let date = nowDate.getDate()
       let month = nowDate.getMonth()
-      let year = nowDate.getFullYear()
-      month = month + 1
+      let year = nowDate.getFullYear().toString()
+      month = (month + 1).toString()
+      date = this.addZero(date)
+      month = this.addZero(month)
+      console.log('aaaa', year, month, date)
+      console.log('holiday', this.holidayData)
       if (this.holidayData[year]) {
         if (this.holidayData[year][month]) {
           if (this.holidayData[year][month][date]) {
@@ -86,12 +90,17 @@ export default {
         if (item.dateRange.indexOf('-') !== -1) {
           let [showYear, showMonth, showDate] = item.showDate.split('.')
           let [startDate, endDate] = item.dateRange.split('-')
+          startDate = startDate.replace(/\./g, '-')
+          endDate = endDate.replace(/\./g, '-')
           startDate = new Date(startDate)
           endDate = new Date(endDate)
+          debugger
           for (startDate; startDate <= endDate;) {
-            let year = startDate.getFullYear()
+            let year = startDate.getFullYear().toString()
             let month = startDate.getMonth() + 1
             let date = startDate.getDate()
+            date = this.addZero(date)
+            month = this.addZero(month)
             if (!holidayTmp[year]) {
               holidayTmp[year] = {}
             }
@@ -100,10 +109,11 @@ export default {
             }
             let tmp = {
               isRest: item.isRest,
-              name: year === parseInt(showYear) && month === parseInt(showMonth) && date === parseInt(showDate) ? item.showText : ''
+              name: parseInt(year) === parseInt(showYear) && parseInt(month) === parseInt(showMonth) && parseInt(date) === parseInt(showDate) ? item.showText : ''
             }
             holidayTmp[year][month][date] = tmp
             startDate = new Date(startDate.getTime() + 24 * 60 * 60 * 1000)
+            console.log(startDate)
           }
         } else {
           let [year, month, date] = item.dateRange.split('.')
@@ -121,6 +131,13 @@ export default {
         }
       })
       this.holidayData = holidayTmp
+    },
+    addZero: function (val) {
+      if (val > 9) {
+        return val.toString()
+      } else {
+        return `0${val}`
+      }
     }
   },
   mounted () {
