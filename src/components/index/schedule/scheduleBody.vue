@@ -226,14 +226,18 @@ export default {
   background-size: 100% 100%;
 }
 .blur {
-  background: rgba(0, 0, 0, .1);
+  background: rgba(0, 0, 0, .2);
 }
 .yd-flexbox-item{
   text-align: center;
   user-select: none;
 }
 .lesson_num{
-  border-bottom: 1px solid #fff;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-bottom: 1px solid #ccc;
 }
 .schedule{
   color: #eee;
