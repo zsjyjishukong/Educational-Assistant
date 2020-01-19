@@ -1,45 +1,48 @@
 <template>
-  <div id="schedule-body">
-    <div class="blur" style="height: 100%">
-      <div class="schedule">
-        <yd-flexbox class="title">
-          <yd-flexbox-item>
-            {{showNowWeek()}}<br>
-            {{month}}月
-          </yd-flexbox-item>
-          <yd-flexbox-item v-for="(i, key) in week" :key="i.getDate()">
-            {{day[key]}}<br>
-            {{i.getDate()}}日
-          </yd-flexbox-item>
-        </yd-flexbox>
-        <yd-flexbox class="body" v-for="i in dayClassesNum" :key="i">
-          <yd-flexbox-item class="lesson_num">
-            {{(2*i-1)}}-{{2*i}}
-          </yd-flexbox-item>
-          <yd-flexbox-item v-for="j in dayTest" :key="j" :style="{background: setOpacity(calculateClassForOddOrEven(classes[j-1][i-1]).bgcolor), color: calculateClassForOddOrEven(classes[j-1][i-1]).color}">
-            <div class="class-detail">
-              <div class="class-name">
-                {{limitTextLength(calculateClassForOddOrEven(classes[j-1][i-1]).name, 12)}}
+  <page-template title="课表查询" :actived="1">
+    <div id="schedule-body" slot="body">
+      <div class="blur">
+        <div class="schedule">
+          <yd-flexbox class="title">
+            <yd-flexbox-item>
+              {{showNowWeek()}}<br>
+              {{month}}月
+            </yd-flexbox-item>
+            <yd-flexbox-item v-for="(i, key) in week" :key="i.getDate()">
+              {{day[key]}}<br>
+              {{i.getDate()}}日
+            </yd-flexbox-item>
+          </yd-flexbox>
+          <yd-flexbox class="body" v-for="i in dayClassesNum" :key="i">
+            <yd-flexbox-item class="lesson_num">
+              {{(2*i-1)}}-{{2*i}}
+            </yd-flexbox-item>
+            <yd-flexbox-item v-for="j in dayTest" :key="j" :style="{background: setOpacity(calculateClassForOddOrEven(classes[j-1][i-1]).bgcolor), color: calculateClassForOddOrEven(classes[j-1][i-1]).color}">
+              <div class="class-detail">
+                <div class="class-name">
+                  {{limitTextLength(calculateClassForOddOrEven(classes[j-1][i-1]).name, 12)}}
+                </div>
+                <div class="class-teacher">
+                  {{calculateClassForOddOrEven(classes[j-1][i-1]).teacher}}
+                </div>
+                <div class="class-place">
+                  {{calculateClassForOddOrEven(classes[j-1][i-1]).place}}
+                </div>
+                <div class="class-week">
+                  {{calculateClassForOddOrEven(classes[j-1][i-1]).weeks}}
+                </div>
               </div>
-              <div class="class-teacher">
-                {{calculateClassForOddOrEven(classes[j-1][i-1]).teacher}}
-              </div>
-              <div class="class-place">
-                {{calculateClassForOddOrEven(classes[j-1][i-1]).place}}
-              </div>
-              <div class="class-week">
-                {{calculateClassForOddOrEven(classes[j-1][i-1]).weeks}}
-              </div>
-            </div>
-          </yd-flexbox-item>
-        </yd-flexbox>
+            </yd-flexbox-item>
+          </yd-flexbox>
+        </div>
       </div>
     </div>
-  </div>
+  </page-template>
 </template>
 
 <script>
 import requestSchedule from '../../../api/index'
+import pageTemplate from '../../common/page-temlate'
 
 export default {
   name: 'schedule-body',
@@ -47,6 +50,9 @@ export default {
     student: {
       type: Object
     }
+  },
+  components: {
+    pageTemplate
   },
   data () {
     return {
@@ -225,8 +231,13 @@ export default {
   background-image: url("katong.jpg");
   background-size: 100% 100%;
 }
+#schedule-body * {
+  box-sizing: border-box;
+}
 .blur {
   background: rgba(0, 0, 0, .2);
+  height: 100%;
+  overflow-y: hidden;
 }
 .yd-flexbox-item{
   text-align: center;

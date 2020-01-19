@@ -1,6 +1,6 @@
 <template>
-  <yd-layout>
-    <div id="score-body">
+  <page-template title="成绩查询" :actived="0">
+    <div id="score-body" slot="body">
       <div class="jd">
       <span class="name">
         姓名：{{student.name}}
@@ -43,11 +43,11 @@
       </div>
     </yd-accordion>
     </div>
-  </yd-layout>
+  </page-template>
 </template>
 
 <script>
-
+import pageTemplate from '../../common/page-temlate'
 export default {
   name: 'scoreBody',
   props: {
@@ -57,6 +57,9 @@ export default {
     score: {
       type: Object
     }
+  },
+  components: {
+    pageTemplate
   },
   methods: {
     popoutScore: function (scoreObj) {

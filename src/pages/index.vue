@@ -1,31 +1,6 @@
 <template>
   <div id="index-page" style="height: 100%;">
-    <yd-layout>
-      <yd-navbar slot="navbar" :title="title" id="navbar">
-        <router-link :to="leftLink" slot="left" v-if="leftShow">
-          <yd-navbar-back-icon></yd-navbar-back-icon>
-        </router-link>
-        <yd-icon name="footmark" slot="right" style="color: #000;" v-if="rightShow" @click.native="showSelectYear"></yd-icon>
-      </yd-navbar>
-      <div id="index-body" style="height: 100%">
-        <router-view ref="child" v-on:changeNavAndTab="changeNavAndTab"
-                     :student="student" :score="score" v-on:queryScore="queryScore"></router-view>
-      </div>
-
-      <yd-tabbar slot="tabbar" v-if="tabbarShow">
-        <yd-tabbar-item title="成绩查询" link="/index/score" :active="actived === 0 ? true : false">
-          <yd-icon name="feedback" slot="icon"></yd-icon>
-        </yd-tabbar-item>
-        <yd-tabbar-item title="课表查询" link="/index/schedule" :active="actived === 1 ? true : false">
-          <yd-icon name="location" slot="icon"></yd-icon>
-        </yd-tabbar-item>
-        <yd-tabbar-item title="个人中心" link="/index/mine" :active="actived === 2 ? true : false">
-          <yd-icon name="ucenter-outline" slot="icon"></yd-icon>
-        </yd-tabbar-item>
-      </yd-tabbar>
-      <yd-actionsheet :items="selectYear" v-model="selectYearShow"></yd-actionsheet>
-      <yd-actionsheet :items="selectTerm" v-model="selectTermShow"></yd-actionsheet>
-    </yd-layout>
+    <router-view ref="child" v-on:changeNavAndTab="changeNavAndTab" :student="student" :score="score" v-on:queryScore="queryScore"></router-view>
   </div>
 </template>
 

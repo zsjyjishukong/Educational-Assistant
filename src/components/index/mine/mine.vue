@@ -1,50 +1,54 @@
 <template>
-  <div id="mine-body">
-    <div class="mine-index-page">
-      <div id="user-detail">
-        <div class="user-detail-content">
-          <div class="header-pic-father">
-            <img class="header-pic" :src=student.img>
-          </div>
-          <div class="user-info">
-            <div>姓名：{{student.name}}</div>
-            <div>学院：{{student.collage}}</div>
-            <div>专业：{{student.major}}</div>
+  <page-template title="我的" :actived="2">
+    <div id="mine-body" slot="body">
+      <div class="mine-index-page">
+        <div id="user-detail">
+          <div class="user-detail-content">
+            <div class="header-pic-father">
+              <img class="header-pic" :src=student.img>
+            </div>
+            <div class="user-info">
+              <div>姓名：{{student.name}}</div>
+              <div>学院：{{student.collage}}</div>
+              <div>专业：{{student.major}}</div>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="user-selects">
-        <div class="user-select" @click="$router.push('./privacy')">隐私设置 <span class="right-arrow"></span></div>
-        <div class="user-select" @click="$router.push('./reward')">打赏我们 <span class="right-arrow"></span></div>
-        <div class="user-select" @click="$router.push('./about')">关于我们 <span class="right-arrow"></span></div>
-        <div class="user-select" @click="$router.push('./calendar')">查看日历 <span class="right-arrow"></span></div>
-      </div>
-      <div class="unbind">
-        <yd-button size="large" type="danger" @click.native="confirmUnbind">解除绑定</yd-button>
-      </div>
-      <yd-slider autoplay="3000">
-        <yd-slider-item>
-          <a @click="uploadNotify">
-            <img src="./static/slider1.jpg">
-          </a>
-        </yd-slider-item>
-        <yd-slider-item>
-          <!--<a @click="#">-->
+        <div class="user-selects">
+          <div class="user-select" @click="$router.push('./privacy')">隐私设置 <span class="right-arrow"></span></div>
+          <div class="user-select" @click="$router.push('./reward')">打赏我们 <span class="right-arrow"></span></div>
+          <div class="user-select" @click="$router.push('./about')">关于我们 <span class="right-arrow"></span></div>
+          <div class="user-select" @click="$router.push('./calendar')">查看日历 <span class="right-arrow"></span></div>
+        </div>
+        <div class="unbind">
+          <yd-button size="large" type="danger" @click.native="confirmUnbind">解除绑定</yd-button>
+        </div>
+        <yd-slider autoplay="3000">
+          <yd-slider-item>
+            <a @click="uploadNotify">
+              <img src="./static/slider1.jpg">
+            </a>
+          </yd-slider-item>
+          <yd-slider-item>
+            <!--<a @click="#">-->
             <img src="./static/slider2.jpg">
-          <!--</a>-->
-        </yd-slider-item>
-        <yd-slider-item>
-          <!--<a @click="#">-->
+            <!--</a>-->
+          </yd-slider-item>
+          <yd-slider-item>
+            <!--<a @click="#">-->
             <img src="./static/slider3.jpg">
-          <!--</a>-->
-        </yd-slider-item>
-      </yd-slider>
+            <!--</a>-->
+          </yd-slider-item>
+        </yd-slider>
+      </div>
     </div>
-  </div>
+  </page-template>
 </template>
 
 <script>
 import request from '../../../api/index'
+import pageTemplate from '../../common/page-temlate'
+
 export default {
   name: 'mine',
   props: {
@@ -55,6 +59,9 @@ export default {
   data () {
     return {
     }
+  },
+  components: {
+    pageTemplate
   },
   methods: {
     popout: function (title, msg) {

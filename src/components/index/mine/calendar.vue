@@ -1,5 +1,9 @@
 <template>
-  <div id="calendar-page" style="height: 100%">
+  <page-template title="学校日历" :tab-show="false">
+    <router-link to="/index/mine" slot="left">
+      <yd-navbar-back-icon></yd-navbar-back-icon>
+    </router-link>
+    <div id="calendar-page" style="height: 100%" slot="body">
       <el-calendar style="text-align: center;">
         <!-- 这里使用的是 2.5 slot 语法，对于新项目请使用 2.6 slot 语法-->
         <template
@@ -11,12 +15,18 @@
           <div class="name" v-if="isDay(date)">{{isDay(date).name}}</div>
         </template>
       </el-calendar>
-  </div>
+    </div>
+
+  </page-template>
 </template>
 <script>
+import pageTemplate from '../../common/page-temlate'
 
 export default {
   name: 'calendar',
+  components: {
+    pageTemplate
+  },
   data () {
     return {
       holidayData: {},
@@ -73,8 +83,6 @@ export default {
       month = (month + 1).toString()
       date = this.addZero(date)
       month = this.addZero(month)
-      console.log('aaaa', year, month, date)
-      console.log('holiday', this.holidayData)
       if (this.holidayData[year]) {
         if (this.holidayData[year][month]) {
           if (this.holidayData[year][month][date]) {
@@ -94,7 +102,6 @@ export default {
           endDate = endDate.replace(/\./g, '-')
           startDate = new Date(startDate)
           endDate = new Date(endDate)
-          debugger
           for (startDate; startDate <= endDate;) {
             let year = startDate.getFullYear().toString()
             let month = startDate.getMonth() + 1
@@ -154,18 +161,20 @@ export default {
   .name{
     margin-top: 65%;
     color: #aaa;
-    font-size: 10px;
+    font-size: 9px;
   }
   .rest{
-    float: right;
+    position: absolute;
     color: #04be02 ;
-    margin-top: -5px;
+    top: 3px;
+    right: 3px;
+    font-size: 10px;
   }
   .study{
-    float: right;
-    margin-right: 3px;
+    position: absolute;
+    top: 3px;
+    right: 3px;
     color: #EF4F4F ;
-    margin-top: -3px;
     font-size:10px;
   }
   .holiday{
@@ -181,5 +190,6 @@ export default {
 <style>
   .el-calendar-table .el-calendar-day{
     height: 70px;
+    position: relative;
   }
 </style>
