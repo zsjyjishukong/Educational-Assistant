@@ -1,7 +1,7 @@
 import axios from 'axios'
 import qs from 'qs'
 import router from '../router/index'
-import { Toast } from 'vue-ydui/dist/lib.rem/dialog'
+import { Toast, Loading } from 'vue-ydui/dist/lib.rem/dialog'
 axios.defaults.withCredentials = true
 export default function http (url, data = {}, type = 'GET') {
   return new Promise((resolve, reject) => {
@@ -23,16 +23,19 @@ export default function http (url, data = {}, type = 'GET') {
           if (code === 0) {
             resolve(res.data)
           } else if (code === 1) { // 发生错误
-            sessionStorage.clear()
-            setTimeout(() => {
-              router.push('/')
-            }, 100)
+            Loading.close()
+            Toast({
+              mes: res.data.msg.error,
+              timeout: 2000,
+              icon: 'error'
+            })
           } else if (code === 2) { // 未登录
             Toast({
               mes: '尚未登录',
               timeout: 2000,
               icon: 'error',
               callback: () => {
+                document.cookie = 'token='
                 router.push('/')
               }
             })
