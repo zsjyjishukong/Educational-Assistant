@@ -1,5 +1,8 @@
 <template>
   <page-template title="成绩查询" :actived="0">
+    <div slot="left">
+      <yd-icon name="refresh" @click.native="refreshScore" style="color: #000;"></yd-icon>
+    </div>
     <div id="score-body" slot="body">
       <div class="jd">
       <span class="name">
@@ -48,13 +51,11 @@
 
 <script>
 import pageTemplate from '../../common/page-temlate'
+import requestIndex from '../../../api'
 export default {
   name: 'scoreBody',
   props: {
     student: {
-      type: Object
-    },
-    score: {
       type: Object
     }
   },
@@ -101,17 +102,92 @@ export default {
         return false
       }
       return true
+    },
+    async queryScore () {
+      if (this.queryScoreRetry === 6) {
+        this.popout('服务器错误', '查成绩服务错误，请重试……<br>如多次出现，请联系管理员')
+        return false
+      }
+      this.$dialog.loading.open(`正在进行第${this.queryScoreRetry}次查询……`)
+      let res = null
+      let i = 1
+      try {
+        res = await requestIndex.getScore()
+      } catch (e) {
+        this.$dialog.loading.close()
+        this.queryScoreRetry += 1
+        this.queryScore()
+        return true
+      }
+      while (res.error) {
+        if (this.inArray(res.error, this.errorArray)) {
+          break
+        } else if (i < 5) {
+          res = await requestIndex.getScore()
+          i++
+        } else {
+          res = false
+        }
+      }
+      this.handleScore(res)
+    },
+    handleScore: function (res) {
+      if (res) {
+        if (this.inArray(res.error, this.errorArray)) {
+          this.popout('出错了', res.error)
+        } else {
+          let score = {}
+          if (res.data) {
+            res.data.forEach(item => {
+              if (!score[item['year']]) {
+                score[item['year']] = {}
+              }
+              if (!score[item['year']][item['term']]) {
+                score[item['year']][item['term']] = []
+              }
+              score[item['year']][item.term].push(item)
+            })
+          }
+          this.$set(this.score, 'score_info', score)
+          this.$set(this.score, 'point', res.point ? res.point : 0)
+          sessionStorage.setItem('score', JSON.stringify(this.score))
+        }
+      } else {
+        this.popout('服务器错误', `服务器错误，请联系管理员<br>${res.error}`)
+      }
+      this.$dialog.loading.close()
+    },
+    inArray: function (str, array) {
+      if (str) {
+        for (let i in array) {
+          if (str.indexOf(array[i]) !== -1) {
+            return true
+          }
+        }
+      }
+      return false
+    },
+    async refreshScore () {
+      let res = await requestIndex.refreshScore()
+      console.log(res)
     }
   },
   data () {
     return {
-      errorArray: ['密码错误', '用户名不存在或未按照要求参加教学活动']
+      errorArray: ['密码错误', '用户名不存在或未按照要求参加教学活动'],
+      score: {
+        point: 0,
+        score_info: {}
+      },
+      queryScoreRetry: 0
     }
   },
   mounted () {
-    this.$emit('changeNavAndTab', {tabShow: true, showId: 0, title: '成绩查询', leftShow: false, rightShow: false, leftLink: ''})
-    if (!this.score) {
-      this.$emit('queryScore')
+    let score = sessionStorage.getItem('score')
+    if (score) {
+      this.score = JSON.parse(score)
+    } else {
+      this.queryScore()
     }
   }
 }

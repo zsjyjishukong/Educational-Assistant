@@ -1,43 +1,53 @@
 <template>
-  <page-template title="课表查询" :actived="1">
-    <div id="schedule-body" slot="body">
-      <div class="blur">
-        <div class="schedule">
-          <yd-flexbox class="title">
-            <yd-flexbox-item>
-              {{showNowWeek()}}<br>
-              {{month}}月
-            </yd-flexbox-item>
-            <yd-flexbox-item v-for="(i, key) in week" :key="i.getDate()">
-              {{day[key]}}<br>
-              {{i.getDate()}}日
-            </yd-flexbox-item>
-          </yd-flexbox>
-          <yd-flexbox class="body" v-for="i in dayClassesNum" :key="i">
-            <yd-flexbox-item class="lesson_num">
-              {{(2*i-1)}}-{{2*i}}
-            </yd-flexbox-item>
-            <yd-flexbox-item v-for="j in dayTest" :key="j" :style="{background: setOpacity(calculateClassForOddOrEven(classes[j-1][i-1]).bgcolor), color: calculateClassForOddOrEven(classes[j-1][i-1]).color}">
-              <div class="class-detail">
-                <div class="class-name">
-                  {{limitTextLength(calculateClassForOddOrEven(classes[j-1][i-1]).name, 12)}}
+  <div class="schedule-page">
+    <page-template title="课表查询" :actived="1">
+      <div id="schedule-body" slot="body">
+        <div class="blur">
+          <div class="schedule">
+            <yd-flexbox class="title">
+              <yd-flexbox-item>
+                {{showNowWeek()}}<br>
+                {{month}}月
+              </yd-flexbox-item>
+              <yd-flexbox-item v-for="(i, key) in week" :key="i.getDate()">
+                {{day[key]}}<br>
+                {{i.getDate()}}日
+              </yd-flexbox-item>
+            </yd-flexbox>
+            <yd-flexbox class="body" v-for="i in dayClassesNum" :key="i">
+              <yd-flexbox-item class="lesson_num">
+                {{(2*i-1)}}-{{2*i}}
+              </yd-flexbox-item>
+              <yd-flexbox-item v-for="j in dayTest" :key="j" :style="{background: setOpacity(calculateClassForOddOrEven(classes[j-1][i-1]).bgcolor), color: calculateClassForOddOrEven(classes[j-1][i-1]).color}">
+                <div class="class-detail">
+                  <div class="class-name">
+                    {{limitTextLength(calculateClassForOddOrEven(classes[j-1][i-1]).name, 12)}}
+                  </div>
+                  <div class="class-teacher">
+                    {{calculateClassForOddOrEven(classes[j-1][i-1]).teacher}}
+                  </div>
+                  <div class="class-place">
+                    {{calculateClassForOddOrEven(classes[j-1][i-1]).place}}
+                  </div>
+                  <div class="class-week">
+                    {{calculateClassForOddOrEven(classes[j-1][i-1]).weeks}}
+                  </div>
                 </div>
-                <div class="class-teacher">
-                  {{calculateClassForOddOrEven(classes[j-1][i-1]).teacher}}
-                </div>
-                <div class="class-place">
-                  {{calculateClassForOddOrEven(classes[j-1][i-1]).place}}
-                </div>
-                <div class="class-week">
-                  {{calculateClassForOddOrEven(classes[j-1][i-1]).weeks}}
-                </div>
-              </div>
-            </yd-flexbox-item>
-          </yd-flexbox>
+              </yd-flexbox-item>
+            </yd-flexbox>
+          </div>
         </div>
       </div>
-    </div>
-  </page-template>
+      <div slot="right">
+        <yd-icon name="footmark" @click.native="selectYearShow = true" style="color: #666"></yd-icon>
+      </div>
+<!--      <div slot="left">-->
+<!--        <yd-icon name="refresh" @click.native="refreshSchedule"></yd-icon>-->
+<!--      </div>-->
+    </page-template>
+    <yd-actionsheet :items="selectYear" v-model="selectYearShow"></yd-actionsheet>
+    <yd-actionsheet :items="selectTerm" v-model="selectTermShow"></yd-actionsheet>
+  </div>
 </template>
 
 <script>
@@ -59,13 +69,57 @@ export default {
       dayTest: 7,
       dayClassesNum: 0,
       classes: [],
-      year: '2019-2020',
-      term: '1',
       month: new Date().getMonth() + 1,
       week: [],
       day: ['周一', '周二', '周三', '周四', '周五', '周六', '周日'],
       nowWeek: 0,
-      schoolDate: '2019/08/26 00:00:00'
+      schoolDate: '2020/02/24 00:00:00',
+      selectYearShow: false,
+      selectTermShow: false,
+      selectedYear: '2019-2020',
+      selectedTerm: '2',
+      selectYear: [
+        {
+          label: '2017-2018',
+          callback: () => {
+            this.selectTermShow = true
+            this.selectedYear = '2017-2018'
+            console.log(this.selectedYear)
+          }
+        },
+        {
+          label: '2018-2019',
+          callback: () => {
+            this.selectTermShow = true
+            this.selectedYear = '2018-2019'
+          }
+        },
+        {
+          label: '2019-2020',
+          callback: () => {
+            this.selectTermShow = true
+            this.selectedYear = '2019-2020'
+          }
+        }
+      ],
+      selectTerm: [
+        {
+          label: '第一学期',
+          callback: () => {
+            this.selectedTerm = 1
+            this.querySchedule(this.selectedYear, this.selectedTerm)
+          }
+        },
+        {
+          label: '第二学期',
+          callback: () => {
+            this.selectedTerm = 2
+            this.querySchedule(this.selectedYear, this.selectedTerm)
+          }
+        }
+      ],
+      nowYear: '2019-2020',
+      nowTerm: '2'
     }
   },
   methods: {
@@ -84,11 +138,10 @@ export default {
       }
     },
     async querySchedule () {
-      // this.classes = []
       this.$dialog.loading.open('正在查询……')
       let res = ''
       try {
-        res = await requestSchedule.getSchedule(this.year, this.term)
+        res = await requestSchedule.getSchedule(this.selectedYear, this.selectedTerm)
       } catch (e) {
         this.$dialog.loading.close()
         this.$dialog.toast({
@@ -99,23 +152,9 @@ export default {
         return false
       }
       while ('error' in res) {
-        res = await requestSchedule.getSchedule(this.year, this.term)
-      }
-      if (res.code === 2) {
-        this.$dialog.toast({
-          mes: '未登录，请重新登录',
-          timeout: 1500,
-          icon: 'error'
-        })
-        document.cookie = 'token='
-        this.$router.push('/')
+        res = await requestSchedule.getSchedule(this.selectedYear, this.selectedTerm)
       }
       this.handleClasses(res.data)
-    },
-    fatherQuerySchedule: function (year, term) {
-      this.year = year
-      this.term = term
-      this.querySchedule()
     },
     handleClasses: function (arr) {
       this.classes = []
@@ -128,10 +167,15 @@ export default {
         if (!this.classes[parseInt(val.day)][parseInt(val.lesson)]) {
           this.classes[parseInt(val.day)][parseInt(val.lesson)] = []
         }
-        let nowWeek = this.nowWeek.toString()
-        if (!this.inArray(nowWeek, val['weeks_arr'])) {
+        if (this.selectedYear !== this.nowYear || this.selectedTerm !== this.nowTerm) {
           val['bgcolor'] = '#ffffff'
           val['color'] = '#999'
+        } else {
+          let nowWeek = this.nowWeek.toString()
+          if (!this.inArray(nowWeek, val['weeks_arr'])) {
+            val['bgcolor'] = '#ffffff'
+            val['color'] = '#999'
+          }
         }
         this.classes[parseInt(val.day)][parseInt(val.lesson)].push(val)
       }
@@ -214,6 +258,12 @@ export default {
         }
         return {name: '', teacher: '', weeks: '', color: '#fff', bgcolor: 'rgba(255,255,255,0)'}
       }
+    },
+    async refreshSchedule () {
+      this.$dialog.loading.open('拼命加载中')
+      let res = await requestSchedule.refreshSchedule()
+      this.$dialog.loading.close()
+      console.log(res)
     }
   },
   mounted () {
@@ -226,6 +276,9 @@ export default {
 </script>
 
 <style scoped>
+.schedule-page{
+  height: 100%;
+}
 #schedule-body{
   height: 100%;
   background-image: url("katong.jpg");
