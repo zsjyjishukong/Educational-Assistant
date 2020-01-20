@@ -158,7 +158,6 @@ export default {
           return false
         }
         if (this.$refs.studentID.valid) {
-          sessionStorage.setItem('token', '1')
           this.toBind()
         } else {
           this.$dialog.toast({
@@ -197,8 +196,6 @@ export default {
     }
   },
   mounted () {
-    document.cookie = 'token = cbf31c91009bd87ad15d01485f1d3ddc'
-    sessionStorage.setItem('token', '1')
     this.wechatLogin()
   }
 }
