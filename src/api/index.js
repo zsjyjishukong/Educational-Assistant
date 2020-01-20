@@ -14,5 +14,13 @@ export default {
   },
   async unbind () {
     return ajax(`${BASE_URL}/user_untying`)
+  },
+  async refreshSchedule () {
+    let res = ajax(`${BASE_URL}/update_schedule`)
+    return res
+  },
+  async refreshScore () {
+    let res = ajax(`${BASE_URL}/update_score`)
+    return res
   }
 }
